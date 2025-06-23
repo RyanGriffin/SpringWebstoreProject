@@ -6,10 +6,13 @@ import com.ryansstore.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.math.BigDecimal;
 
 @SpringBootApplication
+// @EnableScheduling
 public class StoreApplication {
 
     public static void main(String[] args) {
@@ -44,7 +47,7 @@ public class StoreApplication {
         var UserServ = context.getBean(UserService.class);
 
 
-        User testUser = new User(69, "user1@ryansStore.com", "badpass", "user1");
+        com.ryansstore.store.User testUser = new com.ryansstore.store.User(69, "user1@ryansStore.com", "badpass", "user1");
         UserServ.registerUser(testUser);
         // UserServ.registerUser(testUser); // used to test duplicate user handling
         OrderService.placeOrder();
