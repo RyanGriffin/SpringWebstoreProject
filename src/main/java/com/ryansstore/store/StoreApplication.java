@@ -30,7 +30,7 @@ public class StoreApplication {
 //        System.out.println(user);
         var prod = Product.builder()
                 .name("Beans")
-                .price(new BigDecimal(6.9))
+                .price(new BigDecimal(420.69))
                 .build();
 
         var cat = Category.builder().name("Food").build();

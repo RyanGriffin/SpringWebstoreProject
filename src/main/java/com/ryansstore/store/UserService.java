@@ -36,8 +36,6 @@ public class UserService {
     }
 
     // just written for trying out the @SCHEDULED annotation
-    @Scheduled(fixedRate = 5000)
-    public void ScheduledTest() {
-        System.out.println("what up it's the user");
-    }
+    // @Scheduled(fixedRate = 5000)
+    // public void ScheduledTest() { System.out.println("what up it's the user"); }
 }
