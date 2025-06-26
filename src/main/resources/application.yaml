@@ -5,6 +5,8 @@ spring:
     url: jdbc:mysql://localhost:3306/store?createDatabaseIfNotExist=true
     username: root
     password: 20292029
+  jpa:
+    show-sql: true
 payment:
   method: paypal
   stripe:
