@@ -3,6 +3,7 @@ package com.ryansstore.store;
 
 import com.ryansstore.store.entities.*;
 import com.ryansstore.store.entities.User;
+import com.ryansstore.store.repositories.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -16,19 +17,42 @@ import java.math.BigDecimal;
 public class StoreApplication {
 
     public static void main(String[] args) {
-//        var user = User.builder()
-//                .name("John")
-//                .password("pass")
-//                .email("john@ryansStore.com")
-//                .build();
-//
-//        var prof = Profile.builder()
-//                .bio("whattup")
-//                .build();
-//
-//        user.setProfile(prof);
-//        System.out.println(user);
-        var prod = Product.builder()
+        ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        var repo = context.getBean(UserRepository.class);
+
+        var user = repo.findById(1L).orElseThrow(() -> new RuntimeException("User not found"));
+        System.out.println(user.getEmail());
+        repo.findAll().forEach(u -> System.out.println(u.getEmail()));
+        // repo.deleteById(1L);
+
+        // ----- EXERCISE: insert a user into db using repositories
+        /*var repo = context.getBean(UserRepository.class);
+
+        var user = User.builder()
+                .name("John")
+                .email("john@ryan.com")
+                .password("weakpassword")
+                .build();
+
+        repo.save(user);*/
+
+        // ----- EXERCISE: create and set user and profile entities
+        /*var user = User.builder()
+                .name("John")
+                .password("pass")
+                .email("john@ryansStore.com")
+                .build();
+
+        var prof = Profile.builder()
+                .bio("whattup")
+                .build();
+
+        user.setProfile(prof);
+        System.out.println(user);
+         */
+
+        // ----- EXERCISE: Create and set Product and Category entities
+        /*var prod = Product.builder()
                 .name("Beans")
                 .price(new BigDecimal(420.69))
                 .build();
@@ -38,11 +62,10 @@ public class StoreApplication {
         cat.addProduct(prod);
         System.out.println(prod);
         System.out.println(cat);
+         */
 
-        /* ----- INITIAL SET UP, WRITTEN BEFORE DIVING INTO SPRING DATA JPA
-        ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
-
-        var OrderService = context.getBean(OrderService.class);
+        // ----- INITIAL SET UP, WRITTEN BEFORE DIVING INTO SPRING DATA JPA
+        /*var OrderService = context.getBean(OrderService.class);
         var Notif = context.getBean(NotificationManager.class);
         var UserServ = context.getBean(UserService.class);
 
