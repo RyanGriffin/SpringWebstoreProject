@@ -1,6 +1,5 @@
 package com.ryansstore.store;
 
-
 import com.ryansstore.store.entities.*;
 import com.ryansstore.store.entities.User;
 import com.ryansstore.store.repositories.UserRepository;
@@ -9,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-
 import java.math.BigDecimal;
 
 @SpringBootApplication
@@ -19,11 +17,11 @@ public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
         var repo = context.getBean(UserRepository.class);
-
-        var user = repo.findById(1L).orElseThrow(() -> new RuntimeException("User not found"));
-        System.out.println(user.getEmail());
         repo.findAll().forEach(u -> System.out.println(u.getEmail()));
         // repo.deleteById(1L);
+
+        // var user = repo.findById(1L).orElseThrow(() -> new RuntimeException("User not found"));
+        // System.out.println(user.getEmail());
 
         // ----- EXERCISE: insert a user into db using repositories
         /*var repo = context.getBean(UserRepository.class);
@@ -51,7 +49,7 @@ public class StoreApplication {
         System.out.println(user);
          */
 
-        // ----- EXERCISE: Create and set Product and Category entities
+        // ----- EXERCISE: create and set Product and Category entities
         /*var prod = Product.builder()
                 .name("Beans")
                 .price(new BigDecimal(420.69))
