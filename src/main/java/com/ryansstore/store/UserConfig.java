@@ -10,8 +10,8 @@ public class UserConfig {
 
     @Bean
     public UserService userService(EmailNotificationService emailNotificationService) {
-        // explicitly pass in 'emailService' because we only send confirmation emails, not sms
-        // must use EmailNotificationService as a param, emailService() is defined in NotificationConfig, not here
+        // confirmation notifs only via email -> explicitly pass in an email object
+        // emailService() is defined in NotificationConfig -> use EmailNotificationService as a param
         return new UserService(inMemoryUserRepository(), emailNotificationService);
     }
 }
