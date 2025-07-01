@@ -1,10 +1,10 @@
 package com.ryansstore.store;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+// No longer needed with AppConfig class approach
+/*import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-// Not needed when using Config class approach
-// @Service
+@Service*/
 public class OrderService {
     private PaymentService paymentService;
 
