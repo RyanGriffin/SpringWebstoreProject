@@ -1,5 +1,10 @@
 package com.ryansstore.store;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class User {
     private long id;
     private String email;
@@ -13,7 +18,8 @@ public class User {
         this.name = name;
     }
 
-    public void setId(long id) { this.id = id; }
+    // OLD: using automatic getter/setter methods from Lombok
+    /*public void setId(long id) { this.id = id; }
 
     public void setEmail(String email) { this.email = email; }
 
@@ -27,5 +33,5 @@ public class User {
 
     public String getPassword() { return password; }
 
-    public String getName() { return name; }
+    public String getName() { return name; }*/
 }
