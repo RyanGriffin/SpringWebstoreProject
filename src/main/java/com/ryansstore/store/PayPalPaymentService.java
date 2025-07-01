@@ -2,7 +2,7 @@ package com.ryansstore.store;
 
 import org.springframework.stereotype.Service;
 
-// Not needed when using Config class approach
+// Not needed when using AppConfig class approach
 // @Service("PayPal")
 public class PayPalPaymentService implements PaymentService {
     @Override
