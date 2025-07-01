@@ -1,12 +1,11 @@
 package com.ryansstore.store;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
-import java.sql.SQLOutput;
 import java.util.HashMap;
 
-@Repository
+// No longer needed with AppConfig class approach
+/*import org.springframework.stereotype.Repository;
+
+@Repository*/
 public class InMemoryUserRepository implements UserRepository {
     private HashMap<String, User> users;
 

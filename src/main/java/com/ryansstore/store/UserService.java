@@ -1,9 +1,11 @@
 package com.ryansstore.store;
 
 // import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 
-@Service
+// No longer needed with AppConfig class approach
+/*import org.springframework.stereotype.Service;
+
+@Service*/
 public class UserService {
     private final UserRepository userRepo;
     private final NotificationService notifService;
@@ -26,7 +28,7 @@ public class UserService {
             throw new IllegalArgumentException("a user with email \" + user.getEmail() + \" already exists! Duplicate users are not supported.");
         }
 
-        // WRONG APPROACH BELOW: NEED TO USE CONSTRUCTOR INJECTION!!!!
+        // WRONG APPROACH BELOW: NEED TO USE CONSTRUCTOR INJECTION!!!
         /*InMemoryUserRepository userRepo = new InMemoryUserRepository();
         userRepo.saveUser(user);
 

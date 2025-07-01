@@ -32,7 +32,7 @@ public class AppConfig {
     }
 
     @Bean
-    @Primary
+    @Primary // email is the primary contact method, prevents autowiring issue in UserService
     public EmailNotificationService emailService() { return new EmailNotificationService(); }
 
     @Bean
@@ -47,5 +47,14 @@ public class AppConfig {
             return new NotificationManager(smsService());
 
         return null;
+    }
+
+    @Bean
+    public InMemoryUserRepository inMemoryUserRepository() { return new InMemoryUserRepository(); }
+
+    @Bean
+    public UserService userService() {
+        // explicitly pass in 'emailService()' because we only send confirmation emails, not sms
+        return new UserService(inMemoryUserRepository(), emailService());
     }
 }
