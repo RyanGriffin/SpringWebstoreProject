@@ -1,13 +1,17 @@
 package com.ryansstore.store;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+// No longer needed with AppConfig class approach
+/*import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service*/
 public class NotificationManager {
     private NotificationService notificationService;
 
-    public NotificationManager(@Qualifier("Email") NotificationService notificationService) { this.notificationService = notificationService; }
+    public NotificationManager(NotificationService notificationService) { this.notificationService = notificationService; }
+
+    // old approach (uses qualifier instead of handling notifServ choice in code)
+    // public NotificationManager(@Qualifier("Email") NotificationService notificationService) { this.notificationService = notificationService; }
 
     public void sendNotification(String message) { notificationService.sendNotification(message); }
 

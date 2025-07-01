@@ -16,12 +16,14 @@ public class StoreApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
-        var repo = context.getBean(UserRepository.class);
+        // ----- EXERCISE: display registered user's emails using repository
+        /*var repo = context.getBean(UserRepository.class);
         repo.findAll().forEach(u -> System.out.println(u.getEmail()));
         // repo.deleteById(1L);
 
         // var user = repo.findById(1L).orElseThrow(() -> new RuntimeException("User not found"));
         // System.out.println(user.getEmail());
+        */
 
         // ----- EXERCISE: insert a user into db using repositories
         /*var repo = context.getBean(UserRepository.class);
@@ -63,16 +65,16 @@ public class StoreApplication {
          */
 
         // ----- INITIAL SET UP, WRITTEN BEFORE DIVING INTO SPRING DATA JPA
-        /*var OrderService = context.getBean(OrderService.class);
+        // /*
+        var OrderService = context.getBean(OrderService.class);
         var Notif = context.getBean(NotificationManager.class);
         var UserServ = context.getBean(UserService.class);
 
-
-        com.ryansstore.store.User testUser = new com.ryansstore.store.User(69, "user1@ryansStore.com", "badpass", "user1");
+        com.ryansstore.store.User testUser = new com.ryansstore.store.User(69, "user1@ryan.com", "badpass", "user1");
         UserServ.registerUser(testUser);
         // UserServ.registerUser(testUser); // used to test duplicate user handling
         OrderService.placeOrder();
-        Notif.sendNotification("Congratulations! Your order has been placed!", "ryan@ryan.com");
-        */
+        Notif.sendNotification("Congratulations! Your order has been placed!", testUser.getEmail());
+        // */
     }
 }

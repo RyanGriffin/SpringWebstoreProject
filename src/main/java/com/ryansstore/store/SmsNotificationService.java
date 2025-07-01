@@ -1,11 +1,12 @@
 package com.ryansstore.store;
 
-import org.springframework.stereotype.Service;
+// No longer needed with AppConfig class approach
+/*import org.springframework.stereotype.Service;
 
-@Service("SMS")
+@Service("SMS")*/
 public class SmsNotificationService implements NotificationService {
     @Override
-    public void sendNotification(String message) { System.out.println("Sending SMS: " + message); }
+    public void sendNotification(String message) { System.out.println("Sending SMS...\nMessage: " + message); }
 
     @Override
     public void sendNotification(String message, String recipient) {

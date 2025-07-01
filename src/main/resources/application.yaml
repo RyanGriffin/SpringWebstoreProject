@@ -8,12 +8,13 @@ spring:
   jpa:
     show-sql: true
 payment:
-  method: paypal
+  method: stripe
   stripe:
     apiUrl: https://api.stripe.com
     enabled: true
     timeOut: 1000
     supportedCurrencies: USD,EUR,GBP
 contact:
+  method: email
   emailPort: 5761
   emailHost: https://smtp.gmail.com
