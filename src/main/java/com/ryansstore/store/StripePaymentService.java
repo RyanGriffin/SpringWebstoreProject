@@ -1,14 +1,14 @@
 package com.ryansstore.store;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-// Not needed when using AppConfig class approach
-// @Service("Stripe")
-// @Primary
+// No longer needed with AppConfig class approach
+/*import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
+@Service("Stripe")
+@Primary*/
 public class StripePaymentService implements PaymentService {
     @Value("${payment.stripe.apiUrl}")
     private String apiURL;
