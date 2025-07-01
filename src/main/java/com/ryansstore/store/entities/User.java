@@ -8,11 +8,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+// @ToString
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @Entity
 @Table(name = "users")
@@ -22,8 +22,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    // 'nullable = "false"' is redundant
-    // already handled on the db level
+    // nullable = "false" is redundant, already handled in db
     @Column(nullable = false, name = "name")
     private String name;
 

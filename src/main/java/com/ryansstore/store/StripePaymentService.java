@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Not needed when using Config class approach
 // @Service("Stripe")
 // @Primary
 public class StripePaymentService implements PaymentService {

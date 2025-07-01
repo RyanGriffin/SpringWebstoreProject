@@ -2,13 +2,12 @@ package com.ryansstore.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
+// @ToString
 @Getter
 @Setter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -7,19 +7,11 @@ import org.springframework.stereotype.Service;
 public class NotificationManager {
     private NotificationService notificationService;
 
-    public NotificationManager(@Qualifier("Email") NotificationService notificationService) {
-        this.notificationService = notificationService;
-    }
+    public NotificationManager(@Qualifier("Email") NotificationService notificationService) { this.notificationService = notificationService; }
 
-    public void sendNotification(String message) {
-        notificationService.sendNotification(message);
-    }
+    public void sendNotification(String message) { notificationService.sendNotification(message); }
 
-    public void sendNotification(String message, String recipient) {
-        notificationService.sendNotification(message, recipient);
-    }
+    public void sendNotification(String message, String recipient) { notificationService.sendNotification(message, recipient); }
 
-    public void setNotificationService(NotificationService notificationService) {
-        this.notificationService = notificationService;
-    }
+    public void setNotificationService(NotificationService notificationService) { this.notificationService = notificationService; }
 }

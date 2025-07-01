@@ -1,6 +1,6 @@
 package com.ryansstore.store;
 
-import org.springframework.scheduling.annotation.Scheduled;
+// import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,13 +21,13 @@ public class UserService {
             // Step 2: send confirmation email
             notifService.sendNotification("user " + user.getName() + " has been successfully register!", user.getEmail());
         }
-        else { // Optional: handle duplicate user:
+        else { // Optional: handle duplicate user
             notifService.sendNotification("ERROR: user with email " + user.getEmail() + " already exists! Duplicate users are not supported.", user.getEmail());
             throw new IllegalArgumentException("a user with email \" + user.getEmail() + \" already exists! Duplicate users are not supported.");
         }
 
-        /* WRONG APPROACH BELOW: NEED TO USE CONSTRUCTOR INJECTION!!!!
-        InMemoryUserRepository userRepo = new InMemoryUserRepository();
+        // WRONG APPROACH BELOW: NEED TO USE CONSTRUCTOR INJECTION!!!!
+        /*InMemoryUserRepository userRepo = new InMemoryUserRepository();
         userRepo.saveUser(user);
 
         NotificationService notifService = new NotificationService();
@@ -35,7 +35,7 @@ public class UserService {
         */
     }
 
-    // just written for trying out the @SCHEDULED annotation
-    // @Scheduled(fixedRate = 5000)
-    // public void ScheduledTest() { System.out.println("what up it's the user"); }
+    // this is just for trying out the @SCHEDULED annotation
+    /*@Scheduled(fixedRate = 5000)
+    public void ScheduledTest() { System.out.println("what up it's the user"); }*/
 }

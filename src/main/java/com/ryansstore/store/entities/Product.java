@@ -32,5 +32,4 @@ public class Product {
     @JoinColumn(name = "category_id")
     @ToString.Exclude
     private Category category;
-
 }

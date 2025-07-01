@@ -1,17 +1,17 @@
 package com.ryansstore.store;
 
-import com.ryansstore.store.entities.*;
-import com.ryansstore.store.entities.User;
-import com.ryansstore.store.repositories.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import com.ryansstore.store.entities.*;
+import com.ryansstore.store.entities.User;
+import com.ryansstore.store.repositories.UserRepository;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import java.math.BigDecimal;
 
-@SpringBootApplication
 // @EnableScheduling
+@SpringBootApplication
 public class StoreApplication {
 
     public static void main(String[] args) {
