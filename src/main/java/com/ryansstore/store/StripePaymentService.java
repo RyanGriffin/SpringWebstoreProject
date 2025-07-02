@@ -31,4 +31,6 @@ public class StripePaymentService implements PaymentService {
         System.out.println("Currencies: " + supportedCurrencies);
         System.out.println("amount: " + amount);
     }
+
+    public String getType() { return "stripe"; }
 }

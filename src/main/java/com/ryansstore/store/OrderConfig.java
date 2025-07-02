@@ -3,6 +3,7 @@ package com.ryansstore.store;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Value;
+import java.util.List;
 
 @Configuration
 public class OrderConfig {
@@ -17,13 +18,16 @@ public class OrderConfig {
 
     // TO-DO: make this dynamic instead of relying on yaml file
     @Bean
-    public OrderService orderService() {
-        if(paymentMethod.equals("stripe"))
+    public OrderService orderService(List<PaymentService> services) {
+        return new OrderService(services);
+
+        // ----- OLD METHOD: RELIES ON YAML FILE -> STATIC, NOT DYNAMIC
+        /*if(paymentMethod.equals("stripe"))
             return new OrderService(stripe());
 
         if(paymentMethod.equals("paypal"))
             return new OrderService(paypal());
 
-        return null;
+        return null;*/
     }
 }

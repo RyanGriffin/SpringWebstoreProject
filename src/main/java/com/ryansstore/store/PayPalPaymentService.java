@@ -10,4 +10,7 @@ public class PayPalPaymentService implements PaymentService {
         System.out.println("Welcome to PayPal!");
         System.out.println("amount: " + amount);
     }
+
+    @Override
+    public String getType() { return "paypal"; }
 }
