@@ -14,4 +14,7 @@ public class SmsNotificationService implements NotificationService {
         System.out.println("Phone Number: " + recipient);
         System.out.println("Message: " + message);
     }
+
+    @Override
+    public String getType() { return "sms"; }
 }

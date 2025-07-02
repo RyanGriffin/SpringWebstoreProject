@@ -80,7 +80,7 @@ public class StoreApplication {
         // UserServ.registerUser(testUser); // used to test duplicate user handling
         OrderService.placeOrder("stripe", 10.00);
         OrderService.placeOrder("paypal", 10.00);
-        Notif.sendNotification("Congratulations! Your order has been placed!", testUser.getEmail());
+        Notif.sendNotification("email","Congratulations! Your order has been placed!", testUser.getEmail());
         // */
     }
 }

@@ -31,4 +31,7 @@ public class EmailNotificationService implements NotificationService {
         System.out.println("Email Address: " + recipient);
         System.out.println("Message: " + message);
     }
+
+    @Override
+    public String getType() { return "email"; }
 }
