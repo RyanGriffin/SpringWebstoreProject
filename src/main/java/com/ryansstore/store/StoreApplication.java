@@ -17,7 +17,8 @@ public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
         // ----- EXERCISE: display registered user's emails using repository
-        /*var repo = context.getBean(UserRepository.class);
+        /*
+        var repo = context.getBean(UserRepository.class);
         repo.findAll().forEach(u -> System.out.println(u.getEmail()));
         // repo.deleteById(1L);
 
@@ -26,7 +27,8 @@ public class StoreApplication {
         */
 
         // ----- EXERCISE: insert a user into db using repositories
-        /*var repo = context.getBean(UserRepository.class);
+        /*
+        var repo = context.getBean(UserRepository.class);
 
         var user = User.builder()
                 .name("John")
@@ -34,10 +36,12 @@ public class StoreApplication {
                 .password("weakpassword")
                 .build();
 
-        repo.save(user);*/
+        repo.save(user);
+        */
 
         // ----- EXERCISE: create and set user and profile entities
-        /*var user = User.builder()
+        /*
+        var user = User.builder()
                 .name("John")
                 .password("pass")
                 .email("john@ryansStore.com")
@@ -52,7 +56,8 @@ public class StoreApplication {
          */
 
         // ----- EXERCISE: create and set Product and Category entities
-        /*var prod = Product.builder()
+        /*
+        var prod = Product.builder()
                 .name("Beans")
                 .price(new BigDecimal(420.69))
                 .build();
