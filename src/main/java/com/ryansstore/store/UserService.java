@@ -21,7 +21,7 @@ public class UserService {
             userRepo.saveUser(user);
 
             // Step 2: send confirmation email
-            notifService.sendNotification("user " + user.getName() + " has been successfully register!", user.getEmail());
+            notifService.sendNotification("user " + user.getName() + " has been successfully registered!", user.getEmail());
         }
         else { // Optional: handle duplicate user
             notifService.sendNotification("ERROR: user with email " + user.getEmail() + " already exists! Duplicate users are not supported.", user.getEmail());
