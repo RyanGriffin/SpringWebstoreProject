@@ -12,7 +12,7 @@ public class OrderConfig {
     @Bean
     public PaymentService paypal() { return new PayPalPaymentService(); }
 
-    // TO-DO: make this dynamic instead of relying on yaml file
+    // TO-DO: explore using Map instead of List
     @Bean
     public OrderService orderService(List<PaymentService> services) {
         return new OrderService(services);
