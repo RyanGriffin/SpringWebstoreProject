@@ -1,8 +1,6 @@
 package com.ryansstore.store;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 // No longer needed with AppConfig class approach
 /*import org.springframework.beans.factory.annotation.Qualifier;

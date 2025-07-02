@@ -7,9 +7,6 @@ import java.util.List;
 
 @Configuration
 public class OrderConfig {
-    @Value("${payment.method:paypal}")
-    private String paymentMethod;
-
     @Bean
     public PaymentService stripe() { return new StripePaymentService(); }
 
