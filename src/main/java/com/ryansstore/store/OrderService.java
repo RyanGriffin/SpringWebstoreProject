@@ -28,7 +28,7 @@ public class OrderService {
             }
         }
 
-        throw new IllegalArgumentException("Unsupported payment method: " + method);
+        throw new IllegalArgumentException("ERROR: Unsupported payment method: " + method);
     }
 
     // ----- OLD METHOD: RELIES ON YAML FILE -> STATIC, NOT DYNAMIC
