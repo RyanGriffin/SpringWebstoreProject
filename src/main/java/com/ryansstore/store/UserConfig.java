@@ -9,9 +9,8 @@ public class UserConfig {
     public InMemoryUserRepository inMemoryUserRepository() { return new InMemoryUserRepository(); }
 
     @Bean
-    public UserService userService(EmailNotificationService emailNotificationService) {
-        // confirmation notifs only via email -> explicitly pass in an email object
+    public UserService userService(NotificationManager notificationManager) {
         // emailService() is defined in NotificationConfig -> use EmailNotificationService as a param
-        return new UserService(inMemoryUserRepository(), emailNotificationService);
+        return new UserService(inMemoryUserRepository(), notificationManager);
     }
 }

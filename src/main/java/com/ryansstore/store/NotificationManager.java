@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service*/
 public class NotificationManager {
-    private List<NotificationService> notificationServices;
+    private final List<NotificationService> notificationServices;
 
     public NotificationManager(List<NotificationService> services) { this.notificationServices = services; }
 
