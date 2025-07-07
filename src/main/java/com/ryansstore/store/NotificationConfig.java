@@ -23,10 +23,8 @@ public class NotificationConfig {
         /*
         if(notificationMethod.equals("email"))
             return new NotificationManager(emailService());
-
         if(notificationMethod.equals("sms"))
             return new NotificationManager(smsService());
-
         return null;
         */
     }
