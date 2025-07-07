@@ -25,11 +25,11 @@ public class UserService {
             int regCode = (random.nextInt(900000) + 100000);
 
             // send regCode to user over sms
-            // TO-DO: add phone number field to User and use that here
+            // TO-DO: add phone number field to User and use that here!
             notifManager.sendNotification("sms", "Registration code: " + regCode, user.getEmail());
 
             // ask user to input the code they received through sms
-            // TO-DO: handle non-numerical inputs
+            // TO-DO: handle non-numerical inputs better!
             Scanner scanner = new Scanner(System.in);
             int inputCode;
             for(int i = 0; i < 3; i++) {
