@@ -62,5 +62,7 @@ public class UserService {
 
     // this was just for trying out the @SCHEDULED annotation
     /*@Scheduled(fixedRate = 5000)
-    public void ScheduledTest() { System.out.println("what up it's the user"); }*/
+    public void ScheduledTest() {
+        System.out.println("what up it's the user");
+    }*/
 }
