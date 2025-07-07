@@ -1,6 +1,7 @@
 package com.ryansstore.store;
 
 // import org.springframework.scheduling.annotation.Scheduled;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,15 +29,23 @@ public class UserService {
             notifManager.sendNotification("sms", "Registration code: " + regCode, user.getPhoneNumber());
 
             // ask user to input the code they received through sms
-            // TO-DO: handle non-numerical inputs better!
             Scanner scanner = new Scanner(System.in);
-            int inputCode;
+            int inputCode = -1;
             for(int i = 0; i < 3; i++) {
                 if(i > 0)
                     System.out.println("Oops! The code you provided didn't match the registration code!\nLet's try again! Attempt #" + (i+1) + "!");
 
                 System.out.print("Enter your registration code: ");
-                inputCode = scanner.nextInt();
+
+                try {
+                    inputCode = scanner.nextInt();
+                }
+                catch(InputMismatchException e) {
+                    // System.err.println("ERROR: Input didn't contain only integers");
+                    System.out.println("Oops! We noticed a wrong input, please only input numbers!");
+                    scanner.nextLine();
+                    i--;
+                }
 
                 if(inputCode == regCode) { // Success: save user and send confirmation email
                     userRepo.saveUser(user);
@@ -45,10 +54,14 @@ public class UserService {
                 }
             }
             // Failure: unable to due to mismatching registration codes
-            System.out.println("ERROR: input did not match registration code!");
+            // System.err.println("ERROR: Input didn't match registration code after three attempts");
+            System.out.println("Oops! Your input didn't match the registration code, please try again later!");
         }
         else // Optional: handle duplicate user
-            System.out.println("ERROR: user with email " + user.getEmail() + " already exists! Duplicate users are not supported.");
+        {
+            // System.err.println("ERROR: User with email " + user.getEmail() + " already exists! Duplicate users are not supported.");
+            System.out.println("Oops! A user with email " + user.getEmail() + " already exists! Duplicate users are not supported.");
+        }
 
         // WRONG APPROACH BELOW: NEED TO USE CONSTRUCTOR INJECTION!!!
         /*InMemoryUserRepository userRepo = new InMemoryUserRepository();
