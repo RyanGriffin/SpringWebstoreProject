@@ -22,7 +22,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    // nullable = "false" is redundant, already handled in db
+    // NOTE: nullable = "false" is redundant, already handled in db
     @Column(nullable = false, name = "name")
     private String name;
 
@@ -32,17 +32,20 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
     @ManyToMany
+    @Builder.Default
     @JoinTable(
             name = "user_tags",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    @Builder.Default
     private Set<Tag> tags = new HashSet<>();
 
     @OneToOne(mappedBy = "user")

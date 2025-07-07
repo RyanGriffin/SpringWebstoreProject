@@ -10,12 +10,14 @@ public class User {
     private String email;
     private String password;
     private String name;
+    private String phoneNumber;
 
-    public User(long id, String email, String password, String name) {
+    public User(long id, String email, String password, String name, String phoneNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
+        this.phoneNumber = phoneNumber;
     }
 
     // OLD: using automatic getter/setter methods from Lombok

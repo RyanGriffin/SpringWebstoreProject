@@ -75,7 +75,7 @@ public class StoreApplication {
         var Notif = context.getBean(NotificationManager.class);
         var UserServ = context.getBean(UserService.class);
 
-        com.ryansstore.store.User testUser = new com.ryansstore.store.User(69, "user1@ryan.com", "badpass", "user1");
+        com.ryansstore.store.User testUser = new com.ryansstore.store.User(69, "user1@ryan.com", "badpass", "user1", "(555)555-5555");
         UserServ.registerUser(testUser);
         // UserServ.registerUser(testUser); // used to test duplicate user handling
         OrderService.placeOrder("stripe", 10.00);
