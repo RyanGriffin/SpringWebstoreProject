@@ -8,7 +8,7 @@ import java.util.List;
 @Configuration
 public class NotificationConfig {
     @Bean
-    @Primary // email is the primary contact method, prevents autowiring issues (like in UserService)
+    @Primary // email is the primary contact method, prevents autowiring issues
     public EmailNotificationService emailService() { return new EmailNotificationService(); }
 
     @Bean
