@@ -1,5 +1,6 @@
 package com.ryansstore.store;
 
+import com.ryansstore.store.services.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -13,9 +14,27 @@ import java.math.BigDecimal;
 // @EnableScheduling
 @SpringBootApplication
 public class StoreApplication {
-
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+
+        // ----- EXERCISE: understanding fetching strategies
+        // /*
+        var service = context.getBean(UserService.class);
+        var address = service.fetchAddress(1L);
+        System.out.println(address.getFullAddress());
+
+        // WRONG APPROACH: should fetch address by user -> create fetchAddress() in UserService
+        // var addressRepo = context.getBean(AddressRepository.class);
+        // var address = addressRepo.findById(1L).orElseThrow();
+        // */
+
+        // ----- EXERCISE: demonstration of entity states
+        /*
+        var service = context.getBean(UserService.class);
+        service.showEntityStates();
+        service.showRelatedEntities();
+        */
+
         // ----- EXERCISE: display registered user's emails using repository
         /*
         var repo = context.getBean(UserRepository.class);
@@ -69,8 +88,8 @@ public class StoreApplication {
         System.out.println(cat);
          */
 
-        // ----- INITIAL SET UP, WRITTEN BEFORE DIVING INTO SPRING DATA JPA
-        // /*
+        // ----- INITIAL SET UP: written before switch to Spring Data JPA
+        /*
         var OrderService = context.getBean(OrderService.class);
         var Notif = context.getBean(NotificationManager.class);
         var UserServ = context.getBean(UserService.class);
@@ -81,6 +100,6 @@ public class StoreApplication {
         OrderService.placeOrder("stripe", 10.00);
         OrderService.placeOrder("paypal", 10.00);
         Notif.sendNotification("email","Congratulations! Your order has been placed!", testUser.getEmail());
-        // */
+        */
     }
 }
