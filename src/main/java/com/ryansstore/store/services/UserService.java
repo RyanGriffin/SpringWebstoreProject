@@ -54,4 +54,24 @@ public class UserService {
     public Address fetchAddress(Long userId) {
         return addressRepository.findById(userId).orElseThrow();
     }
+
+    public void persistRelated() {
+        var user = User.builder()
+                .name("ryan")
+                .email("ryan@ryan.com")
+                .password("badpass")
+                .phoneNumber("(555)555-5555")
+                .build();
+
+        var address = Address.builder()
+                .street("1027 E Fairmount Rd")
+                .city("Burbank")
+                .state("CA")
+                .zip("91501")
+                .build();
+
+        user.addAddress(address);
+
+        userRepository.save(user);
+    }
 }

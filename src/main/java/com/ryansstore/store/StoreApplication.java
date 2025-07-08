@@ -17,8 +17,15 @@ public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
 
-        // ----- EXERCISE: understanding fetching strategies
+        // ----- EXERCISE: persisting related entities
         // /*
+        var service = context.getBean(UserService.class);
+        service.persistRelated();
+
+        // */
+
+        // ----- EXERCISE: understanding fetching strategies
+        /*
         var service = context.getBean(UserService.class);
         var address = service.fetchAddress(1L);
         System.out.println(address.getFullAddress());
@@ -26,7 +33,7 @@ public class StoreApplication {
         // WRONG APPROACH: should fetch address by user -> create fetchAddress() in UserService
         // var addressRepo = context.getBean(AddressRepository.class);
         // var address = addressRepo.findById(1L).orElseThrow();
-        // */
+        */
 
         // ----- EXERCISE: demonstration of entity states
         /*
@@ -89,7 +96,9 @@ public class StoreApplication {
         System.out.println(cat);
          */
 
-        // ----- INITIAL SET UP: written before switch to Spring Data JPA
+        // ----- INITIAL SET UP:
+        // - written before switch to Spring Data JPA
+        // - Plain Old Java Object (POJO) approach, no entities
         /*
         var OrderService = context.getBean(OrderService.class);
         var Notif = context.getBean(NotificationManager.class);
@@ -99,7 +108,7 @@ public class StoreApplication {
         UserServ.registerUser(testUser);
         // UserServ.registerUser(testUser); // used to test duplicate user handling
         OrderService.placeOrder("stripe", 10.00);
-        OrderService.placeOrder("paypal", 10.00);
+        // OrderService.placeOrder("paypal", 10.00);
         Notif.sendNotification("email","Congratulations! Your order has been placed!", testUser.getEmail());
         */
     }
