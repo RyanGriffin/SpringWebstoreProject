@@ -24,7 +24,7 @@ public class StoreApplication {
 
         // */
 
-        // ----- EXERCISE: understanding fetching strategies
+        // ----- EXERCISE: utilizing fetching strategies
         /*
         var service = context.getBean(UserService.class);
         var address = service.fetchAddress(1L);
@@ -97,8 +97,8 @@ public class StoreApplication {
          */
 
         // ----- INITIAL SET UP:
-        // - written before switch to Spring Data JPA
         // - Plain Old Java Object (POJO) approach, no entities
+        // - written before switch to Spring Data JPA
         /*
         var OrderService = context.getBean(OrderService.class);
         var Notif = context.getBean(NotificationManager.class);
