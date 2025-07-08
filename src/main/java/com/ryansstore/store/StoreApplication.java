@@ -64,6 +64,7 @@ public class StoreApplication {
                 .name("John")
                 .password("pass")
                 .email("john@ryansStore.com")
+                .phoneNumber("(555)555-5555")
                 .build();
 
         var prof = Profile.builder()

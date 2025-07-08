@@ -21,9 +21,6 @@ public class Profile {
     @Column(name = "bio")
     private String bio;
 
-    @Column(name = "phone_number")
-    private String phone_number;
-
     @Column(name = "date_of_birth")
     private LocalDate dob;
 
