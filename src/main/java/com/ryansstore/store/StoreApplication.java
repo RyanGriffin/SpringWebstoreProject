@@ -21,7 +21,6 @@ public class StoreApplication {
         // /*
         var service = context.getBean(UserService.class);
         service.persistRelated();
-
         // */
 
         // ----- EXERCISE: utilizing fetching strategies

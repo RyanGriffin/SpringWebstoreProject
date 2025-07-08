@@ -22,7 +22,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    // NOTE: nullable = "false" is redundant, already handled in db
+    // NOTE: nullable = "false" is redundant here, this is already handled in db
     @Column(nullable = false, name = "name")
     private String name;
 
