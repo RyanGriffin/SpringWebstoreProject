@@ -1,7 +1,6 @@
 package com.ryansstore.store.entities;
 
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
