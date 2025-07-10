@@ -22,7 +22,9 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    @OneToMany( mappedBy = "category",
+                fetch = FetchType.EAGER,
+                cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Builder.Default
     private Set<Product> products = new HashSet<>();
 
