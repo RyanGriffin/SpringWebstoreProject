@@ -1,6 +1,7 @@
 package com.ryansstore.store.entities;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @Builder.Default
     private Set<Product> products = new HashSet<>();
 
