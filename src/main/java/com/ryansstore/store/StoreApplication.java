@@ -20,7 +20,8 @@ public class StoreApplication {
         // ----- EXERCISE: persisting related entities
         // /*
         var service = context.getBean(UserService.class);
-        service.persistRelated();
+        service.deleteRelated(2L);
+        service.deleteAddressOfUser(10L);
         // */
 
         // ----- EXERCISE: utilizing fetching strategies
