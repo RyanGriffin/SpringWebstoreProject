@@ -1,28 +1,67 @@
 package com.ryansstore.store;
 
-import com.ryansstore.store.services.UserService;
+import com.ryansstore.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import com.ryansstore.store.repositories.*;
+import com.ryansstore.store.services.*;
 import com.ryansstore.store.entities.*;
-import com.ryansstore.store.entities.User;
-import com.ryansstore.store.repositories.UserRepository;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 // @EnableScheduling
 @SpringBootApplication
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Managing Products and Wishlists
+        // /*
+        var categoryRepository = context.getBean(CategoryRepository.class);
+        var productRepository = context.getBean(ProductRepository.class);
+        var userRepository = context.getBean(UserRepository.class);
+
+        // Step 1: create the 'Food' category
+//        var category = Category.builder()
+//                .name("Food")
+//                .build();
+//
+//        categoryRepository.save(category);
+
+
+        // Step 2: add product to existing category
+//        // retrieve existing category
+//        var category = categoryRepository.findById((byte)1).orElseThrow(() -> new RuntimeException("Category not found"));
+//
+//        // create new product and assign it the fetched category
+//        var product = Product.builder()
+//                .name("beans")
+//                .price(new BigDecimal(10))
+//                .description("just some beans")
+//                .build();
+//        category.addProduct(product);
+//        productRepository.save(product);
+
+        // Step 3: add product to user's wishlist
+        // fetch a user and add all products to wishlist
+//        var user = userRepository.findById(2L).orElseThrow(() -> new RuntimeException("User not found"));
+//        Set<Product> userWishlist = new HashSet<>();
+//        productRepository.findAll().forEach(userWishlist::add);
+//        user.setWishList(userWishlist);
+//        userRepository.save(user);
+
+        // Step 4: Delete an existing product
+        var productService = context.getBean(ProductService.class);
+        productService.deleteProductById(5L);
+        // */
 
         // ----- EXERCISE: persisting related entities
-        // /*
+        /*
         var service = context.getBean(UserService.class);
         service.deleteRelated(2L);
         service.deleteAddressOfUser(10L);
-        // */
+        */
 
         // ----- EXERCISE: utilizing fetching strategies
         /*
