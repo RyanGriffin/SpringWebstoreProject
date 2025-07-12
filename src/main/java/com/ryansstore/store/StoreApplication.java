@@ -16,8 +16,12 @@ import java.util.Set;
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Demonstration of custom queries with @Query annotation
+        var service = context.getBean(ProductService.class);
+        service.increaseProductPrices(BigDecimal.valueOf(10), (byte)1);
+
         // ----- EXERCISE: Managing Products and Wishlists
-        // /*
+        /*
         var categoryRepository = context.getBean(CategoryRepository.class);
         var productRepository = context.getBean(ProductRepository.class);
         var userRepository = context.getBean(UserRepository.class);
@@ -54,7 +58,7 @@ public class StoreApplication {
         // Step 4: Delete an existing product
         var productService = context.getBean(ProductService.class);
         productService.deleteProductById(5L);
-        // */
+        */
 
         // ----- EXERCISE: persisting related entities
         /*

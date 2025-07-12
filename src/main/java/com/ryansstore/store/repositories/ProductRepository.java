@@ -1,7 +1,11 @@
 package com.ryansstore.store.repositories;
 
+import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,7 +26,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findByPriceGreaterThanEqual(BigDecimal price);
     List<Product> findByPriceLessThan(BigDecimal price);
     List<Product> findByPriceLessThanEqual(BigDecimal price);
-    List<Product> findByPriceBetween(BigDecimal price);
+    List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
 
     // Null
     List<Product> findByDescriptionNull();
@@ -38,4 +42,21 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     // Limit
     List<Product> findTop5ByName(String name);
     List<Product> findFirst5ByNameLikeOrderByPrice(String name);
+
+    // Find products whose prices are in a given range and sort by name
+    List<Product> findByPriceBetweenOrderByName(BigDecimal minPrice, BigDecimal maxPrice);
+
+    // above query is a little long, so we can do this with the @Query annotation...
+    // SQL or JPQL
+    @Query(value = "SELECT * FROM products p WHERE p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.name", nativeQuery = true)
+    List<Product> findProducts(@Param("minPrice") BigDecimal minPrice, @Param("maxPrice") BigDecimal maxPrice);
+
+    // can also use aggregate function...
+    @Query(value = "SELECT COUNT(*) FROM products p WHERE p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.name", nativeQuery = true)
+    List<Product> countProducts(@Param("minPrice") BigDecimal minPrice, @Param("maxPrice") BigDecimal maxPrice);
+
+    // and use this to update! (Using JPQL for this)
+    @Modifying
+    @Query(value = "UPDATE Product p SET p.price = p.price + :newPrice WHERE p.category.id = :categoryID")
+    void updatePriceByCategory(@Param("newPrice") BigDecimal newPrice, @Param("categoryID") Byte categoryID);
 }
