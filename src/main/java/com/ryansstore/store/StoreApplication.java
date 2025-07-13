@@ -16,9 +16,16 @@ import java.util.Set;
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Demonstration of fetching partial data using Projections
+        var service = context.getBean(ProductService.class);
+        Byte categoryID = Byte.valueOf("1");
+        service.fetchProducts(categoryID);
+
         // ----- EXERCISE: Demonstration of custom queries with @Query annotation
+        /*
         var service = context.getBean(ProductService.class);
         service.increaseProductPrices(BigDecimal.valueOf(10), (byte)1);
+         */
 
         // ----- EXERCISE: Managing Products and Wishlists
         /*

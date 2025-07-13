@@ -1,5 +1,6 @@
 package com.ryansstore.store.services;
 
+import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
 import com.ryansstore.store.repositories.CategoryRepository;
 import jakarta.transaction.Transactional;
@@ -35,5 +36,10 @@ public class ProductService {
     @Transactional
     public void increaseProductPrices(BigDecimal priceIncrease, Byte categoryID) {
         productRepository.updatePriceByCategory(priceIncrease, categoryID);
+    }
+
+    public void fetchProducts(byte categoryID) {
+        var products = productRepository.findByCategory(new Category(categoryID));
+        products.forEach(System.out::println);
     }
 }

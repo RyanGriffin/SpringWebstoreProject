@@ -1,5 +1,7 @@
 package com.ryansstore.store.repositories;
 
+import com.ryansstore.store.dtos.ProductSummary;
+import com.ryansstore.store.dtos.ProductSummaryDTO;
 import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
 import org.springframework.data.jpa.repository.Modifying;
@@ -59,4 +61,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     @Modifying
     @Query(value = "UPDATE Product p SET p.price = p.price + :newPrice WHERE p.category.id = :categoryID")
     void updatePriceByCategory(@Param("newPrice") BigDecimal newPrice, @Param("categoryID") Byte categoryID);
+
+    @Query("select p.id, p.name from Product p where p.category = :category")
+    List<ProductSummary> findByCategory(@Param("category") Category category);
 }
