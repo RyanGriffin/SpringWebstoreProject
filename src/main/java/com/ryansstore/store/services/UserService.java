@@ -90,7 +90,15 @@ public class UserService {
     @Transactional
     public void fetchUser(String email) {
         var user = userRepository.findByEmail(email).orElseThrow();
-        //System.out.println(user.getId());
         System.out.println(user);
+    }
+
+    @Transactional
+    public void fetchUsers() {
+        var users = userRepository.findAllWithAddresses();
+        users.forEach(u -> {
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
     }
 }
