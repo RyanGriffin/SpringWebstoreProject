@@ -49,9 +49,6 @@ public class User {
     )
     private Set<Tag> tags = new HashSet<>();
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-//    private Profile profile;
-
     @ManyToMany
     @JoinTable(
             name = "wishlist",
@@ -59,11 +56,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> wishList = new HashSet<>();
-
-//    public void setProfile(Profile profile) {
-//        this.profile = profile;
-//        profile.setUser(this);
-//    }
 
     public void addAddress(Address address) {
         addresses.add(address);
