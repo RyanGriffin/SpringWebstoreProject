@@ -1,6 +1,7 @@
 package com.ryansstore.store;
 
 import com.ryansstore.store.entities.User;
+import com.ryansstore.store.services.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -16,10 +17,14 @@ import java.util.Set;
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Efficiently loading entities using @EntityGraph
+        var service = context.getBean(UserService.class);
+        service.fetchUser("ryan@ryan.com");
+
         // ----- EXERCISE: Demonstration of fetching partial data using Projections
-        var service = context.getBean(ProductService.class);
+        /*var service = context.getBean(ProductService.class);
         Byte categoryID = Byte.valueOf("1");
-        service.fetchProducts(categoryID);
+        service.fetchProducts(categoryID);*/
 
         // ----- EXERCISE: Demonstration of custom queries with @Query annotation
         /*

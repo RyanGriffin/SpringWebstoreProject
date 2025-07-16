@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// @ToString
 @Setter
 @Getter
 @AllArgsConstructor
@@ -36,8 +35,8 @@ public class User {
     private String phoneNumber;
 
     @OneToMany( mappedBy = "user",
-                cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-                orphanRemoval = true)
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true)
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
@@ -85,5 +84,14 @@ public class User {
     public void removeTag(Tag tag) {
         tags.remove(tag);
         tag.getUsers().remove(this);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "name = " + name + ", " +
+                "email = " + email + ", " +
+                "phoneNumber = " + phoneNumber + ")";
     }
 }

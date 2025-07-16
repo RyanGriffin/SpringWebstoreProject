@@ -86,4 +86,11 @@ public class UserService {
         user.removeAddress(address);
         userRepository.save(user);
     }
+
+    @Transactional
+    public void fetchUser(String email) {
+        var user = userRepository.findByEmail(email).orElseThrow();
+        //System.out.println(user.getId());
+        System.out.println(user);
+    }
 }
