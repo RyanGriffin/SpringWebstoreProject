@@ -1,9 +1,10 @@
 package com.ryansstore.store.services;
 
-import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
 import com.ryansstore.store.repositories.CategoryRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import com.ryansstore.store.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,22 @@ public class ProductService {
     @Transactional
     public void increaseProductPrices(BigDecimal priceIncrease, Byte categoryID) {
         productRepository.updatePriceByCategory(priceIncrease, categoryID);
+    }
+
+    @Transactional
+    public void fetchProducts() {
+        var product = new Product();
+        product.setName("bean");
+
+        var matcher = ExampleMatcher.matching()
+                .withIncludeNullValues()
+                .withIgnorePaths("id", "description")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        var example = Example.of(product, matcher);
+
+        var products = productRepository.findAll(example);
+        products.forEach(System.out::println);
     }
 
     @Transactional

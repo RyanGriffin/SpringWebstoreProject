@@ -1,6 +1,6 @@
 package com.ryansstore.store;
 
-import com.ryansstore.store.services.UserService;
+import com.ryansstore.store.services.ProductService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -10,12 +10,18 @@ import org.springframework.context.ApplicationContext;
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: using 'query by example'
+        var service = context.getBean(ProductService.class);
+        service.fetchProducts();
+
         // ----- EXERCISE: Putting everything together to write Custom Queries
+        /*
         // Step 1: Populate the db with a few user, with 5, 10 and 20 loyalty points respectively
         // userService.populateDatabase(); // only need to run this once
 
         var userService = context.getBean(UserService.class);
         userService.printLoyalProfiles(2);
+         */
 
         // ----- EXERCISE: Using Stored Procedures
         /*

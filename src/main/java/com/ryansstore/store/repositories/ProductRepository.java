@@ -1,19 +1,17 @@
 package com.ryansstore.store.repositories;
 
 import com.ryansstore.store.dtos.ProductSummary;
-import com.ryansstore.store.dtos.ProductSummaryDTO;
 import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.query.Procedure;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     // Strings!
     List<Product> findByName(String name); // SELECT * FROM products WHERE name = ?
     List<Product> findByNameLike(String name); // SELECT * FROM products WHERE name LIKE ?
