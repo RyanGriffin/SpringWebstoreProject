@@ -5,6 +5,7 @@ import com.ryansstore.store.dtos.ProductSummaryDTO;
 import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -49,9 +50,10 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findByPriceBetweenOrderByName(BigDecimal minPrice, BigDecimal maxPrice);
 
     // above query is a little long, so we can do this with the @Query annotation...
-    // SQL or JPQL
-    @Query(value = "SELECT * FROM products p WHERE p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.name", nativeQuery = true)
-    List<Product> findProducts(@Param("minPrice") BigDecimal minPrice, @Param("maxPrice") BigDecimal maxPrice);
+    // can be SQL or JPQL
+    // Also can be stored procedure, like below
+    @Procedure("findProductsByPrice")
+    List<Product> findProducts(BigDecimal minPrice, BigDecimal maxPrice);
 
     // can also use aggregate function...
     @Query(value = "SELECT COUNT(*) FROM products p WHERE p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.name", nativeQuery = true)

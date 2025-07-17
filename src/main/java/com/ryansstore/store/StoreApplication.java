@@ -17,9 +17,15 @@ import java.util.Set;
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Using Stored Procedures
+        var service = context.getBean(ProductService.class);
+        service.fetchProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
+
         // ----- EXERCISE: Avoiding the N+1 problem
+        /*
         var service = context.getBean(UserService.class);
         service.fetchUsers();
+         */
 
         // ----- EXERCISE: Efficiently loading entities using @EntityGraph
         /*

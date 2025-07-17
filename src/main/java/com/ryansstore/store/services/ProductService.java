@@ -38,8 +38,9 @@ public class ProductService {
         productRepository.updatePriceByCategory(priceIncrease, categoryID);
     }
 
-    public void fetchProducts(byte categoryID) {
-        var products = productRepository.findByCategory(new Category(categoryID));
+    @Transactional
+    public void fetchProducts(BigDecimal minPrice, BigDecimal maxPrice) {
+        var products = productRepository.findProducts(minPrice, maxPrice);
         products.forEach(System.out::println);
     }
 }
