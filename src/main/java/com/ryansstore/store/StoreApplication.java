@@ -1,25 +1,27 @@
 package com.ryansstore.store;
 
-import com.ryansstore.store.entities.User;
 import com.ryansstore.store.services.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import com.ryansstore.store.repositories.*;
-import com.ryansstore.store.services.*;
-import com.ryansstore.store.entities.*;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 // @EnableScheduling
 @SpringBootApplication
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Putting everything together to write Custom Queries
+        // Step 1: Populate the db with a few user, with 5, 10 and 20 loyalty points respectively
+        // userService.populateDatabase(); // only need to run this once
+
+        var userService = context.getBean(UserService.class);
+        userService.printLoyalProfiles(2);
+
         // ----- EXERCISE: Using Stored Procedures
+        /*
         var service = context.getBean(ProductService.class);
         service.fetchProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
+         */
 
         // ----- EXERCISE: Avoiding the N+1 problem
         /*
