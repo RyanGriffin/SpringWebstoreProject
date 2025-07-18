@@ -5,14 +5,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.math.BigDecimal;
+
 // @EnableScheduling
 @SpringBootApplication
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Dynamic queries using Criteria API
+        var service = context.getBean(ProductService.class);
+        service.fetchProductsByCriteria("product", BigDecimal.valueOf(1),  BigDecimal.valueOf(15));
+
         // ----- EXERCISE: using 'query by example'
+        /*
         var service = context.getBean(ProductService.class);
         service.fetchProducts();
+         */
 
         // ----- EXERCISE: Putting everything together to write Custom Queries
         /*

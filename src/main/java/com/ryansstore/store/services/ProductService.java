@@ -55,6 +55,11 @@ public class ProductService {
         products.forEach(System.out::println);
     }
 
+    public void fetchProductsByCriteria(String name, BigDecimal minPrice, BigDecimal maxPrice) {
+        var products = productRepository.findProductsByCriteria(name, minPrice, maxPrice);
+        products.forEach(System.out::println);
+    }
+
     @Transactional
     public void fetchProducts(BigDecimal minPrice, BigDecimal maxPrice) {
         var products = productRepository.findProducts(minPrice, maxPrice);
