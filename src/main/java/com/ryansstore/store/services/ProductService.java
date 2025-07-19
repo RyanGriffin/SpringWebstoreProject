@@ -4,8 +4,7 @@ import com.ryansstore.store.entities.Product;
 import com.ryansstore.store.repositories.CategoryRepository;
 import com.ryansstore.store.repositories.specifications.ProductSpec;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.ryansstore.store.repositories.ProductRepository;
@@ -80,5 +79,26 @@ public class ProductService {
             spec = spec.and(ProductSpec.hasPriceLessThanOrEqualTo(maxPrice));
 
         productRepository.findAll(spec).forEach(System.out::println);
+    }
+
+    public void fetchSortedProducts() {
+        var sort = Sort.by("name").and(
+                Sort.by("price").descending()
+        );
+
+        productRepository.findAll(sort).forEach(System.out::println);
+    }
+
+    public void fetchPaginatedProducts(int pageNumber, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        Page<Product> page = productRepository.findAll(pageRequest);
+
+        var products = page.getContent();
+        products.forEach(System.out::println);
+
+        var pageCount = page.getTotalPages();
+        var productCount = page.getTotalElements();
+        System.out.println("Total pages: " + pageCount);
+        System.out.println("Total products: " + productCount);
     }
 }

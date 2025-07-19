@@ -10,9 +10,16 @@ import java.math.BigDecimal;
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Sorting and Pagination!
+        var service = context.getBean(ProductService.class);
+        service.fetchSortedProducts();
+        service.fetchPaginatedProducts(0, 10);
+
         // ----- EXERCISE: Composable queries using Specifications API
+        /*
         var service = context.getBean(ProductService.class);
         service.fetchProductsBySpecification("prod", BigDecimal.valueOf(1), null);
+         */
 
         // ----- EXERCISE: Dynamic queries using Criteria API
         /*
