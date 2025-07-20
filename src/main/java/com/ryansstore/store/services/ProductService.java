@@ -67,6 +67,11 @@ public class ProductService {
         products.forEach(System.out::println);
     }
 
+    public void fetchProductsByCriteria(String productName, String categoryName) {
+        var products = productRepository.findProductsByCriteria(productName, categoryName);
+        products.forEach(System.out::println);
+    }
+
     public void fetchProductsBySpecification(String name, BigDecimal minPrice, BigDecimal maxPrice) {
         // neutral starting point
         Specification<Product> spec = (root, query, criteriaBuilder) -> null;

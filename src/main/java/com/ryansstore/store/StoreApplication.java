@@ -10,10 +10,19 @@ import java.math.BigDecimal;
 public class StoreApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
+        // ----- EXERCISE: Writing Dynamic Queries
+        // TO-DO: 1. Create specification in ProductSpec to filter products by category
+        //        2. Use above specification in UserService.fetchProductsBySpecification.
+        var service = context.getBean(ProductService.class);
+        service.fetchProductsByCriteria("bean", "food");
+        service.fetchProductsByCriteria("bean", BigDecimal.valueOf(1),  BigDecimal.valueOf(15));
+
         // ----- EXERCISE: Sorting and Pagination!
+        /*
         var service = context.getBean(ProductService.class);
         service.fetchSortedProducts();
         service.fetchPaginatedProducts(0, 10);
+        */
 
         // ----- EXERCISE: Composable queries using Specifications API
         /*
