@@ -14,8 +14,13 @@ public class StoreApplication {
         // TO-DO: 1. Create specification in ProductSpec to filter products by category
         //        2. Use above specification in UserService.fetchProductsBySpecification.
         var service = context.getBean(ProductService.class);
+        System.out.println("\nFetching products using Criteria:");
         service.fetchProductsByCriteria("bean", "food");
         service.fetchProductsByCriteria("bean", BigDecimal.valueOf(1),  BigDecimal.valueOf(15));
+
+        System.out.println("\nFetching products using Specification:");
+        service.fetchProductsBySpecification("bean", "food");
+        service.fetchProductsBySpecification("bean", BigDecimal.valueOf(1),  BigDecimal.valueOf(15));
 
         // ----- EXERCISE: Sorting and Pagination!
         /*

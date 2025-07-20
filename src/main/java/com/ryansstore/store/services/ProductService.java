@@ -86,6 +86,18 @@ public class ProductService {
         productRepository.findAll(spec).forEach(System.out::println);
     }
 
+    public void fetchProductsBySpecification(String productName, String categoryName) {
+        // neutral starting point
+        Specification<Product> spec = (root, query, criteriaBuilder) -> null;
+
+        if(productName != null)
+            spec = spec.and(ProductSpec.hasName(productName));
+        if(categoryName != null)
+            spec = spec.and(ProductSpec.hasCategoryName(categoryName));
+
+        productRepository.findAll(spec).forEach(System.out::println);
+    }
+
     public void fetchSortedProducts() {
         var sort = Sort.by("name").and(
                 Sort.by("price").descending()
