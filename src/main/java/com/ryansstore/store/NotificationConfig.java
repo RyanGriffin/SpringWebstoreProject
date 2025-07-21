@@ -14,7 +14,6 @@ public class NotificationConfig {
     @Bean
     public SmsNotificationService smsService() { return new SmsNotificationService(); }
 
-    // TO-DO: make this dynamic instead of relying on yaml file
     @Bean
     public NotificationManager notificationManager(List<NotificationService> services) {
         return new NotificationManager(services);

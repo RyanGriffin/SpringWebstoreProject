@@ -6,10 +6,7 @@ package com.ryansstore.store;
 @Service("PayPal")*/
 public class PayPalPaymentService implements PaymentService {
     @Override
-    public void processPayment(double amount) {
-        System.out.println("Welcome to PayPal!");
-        System.out.println("amount: " + amount);
-    }
+    public void processPayment(double amount) { System.out.println("Welcome to PayPal!\namount: \" + amount"); }
 
     @Override
     public String getType() { return "paypal"; }

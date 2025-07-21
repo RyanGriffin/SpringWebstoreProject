@@ -9,16 +9,16 @@ import java.util.Scanner;
 /*import org.springframework.stereotype.Service;
 
 @Service*/
-public class UserService {
-    private final UserRepository userRepo;
+public class PojoUserService {
+    private final PojoUserRepository userRepo;
     private final NotificationManager notifManager;
 
-    public UserService(UserRepository userRepo, NotificationManager notifManager) {
+    public PojoUserService(PojoUserRepository userRepo, NotificationManager notifManager) {
         this.userRepo = userRepo;
         this.notifManager = notifManager;
     }
 
-    public void registerUser(User user) {
+    public void registerUser(PojoUser user) {
         if(!userRepo.userExists(user)) {
             // optional: add user registration text message
             // generate random code
@@ -71,10 +71,4 @@ public class UserService {
         notifService.sendNotification("user " + user.getName() + " has been successfully register!", user.getEmail());
         */
     }
-
-    // this was just for trying out the @SCHEDULED annotation
-    /*@Scheduled(fixedRate = 5000)
-    public void ScheduledTest() {
-        System.out.println("what up it's the user");
-    }*/
 }

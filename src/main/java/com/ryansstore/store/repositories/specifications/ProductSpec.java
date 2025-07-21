@@ -3,7 +3,6 @@ package com.ryansstore.store.repositories.specifications;
 import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
 import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 import java.math.BigDecimal;
 

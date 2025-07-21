@@ -17,7 +17,7 @@ public class OrderConfig {
     public OrderService orderService(List<PaymentService> services) {
         return new OrderService(services);
 
-        // ----- OLD METHOD: RELIES ON YAML FILE -> STATIC, NOT DYNAMIC
+        // ----- OLD APPROACH: RELIES ON YAML FILE -> STATIC, NOT DYNAMIC
         /*if(paymentMethod.equals("stripe"))
             return new OrderService(stripe());
 

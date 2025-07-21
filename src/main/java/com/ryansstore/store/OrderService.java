@@ -10,15 +10,7 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     private List<PaymentService> paymentServices;
 
-    public OrderService(List<PaymentService> services) {
-        paymentServices = services;
-
-        // TO-DO: Explore using Map instead of List
-        /*
-        paymentServices = services.stream()
-                 .collect(Collectors.toMap(s -> s.getType(), Function.identity()));
-         */
-    }
+    public OrderService(List<PaymentService> services) { paymentServices = services; }
 
     public void placeOrder(String method, double price) {
         for(PaymentService service : paymentServices) {
@@ -31,7 +23,7 @@ public class OrderService {
         throw new IllegalArgumentException("ERROR: Unsupported payment method: " + method);
     }
 
-    // ----- OLD METHOD: RELIES ON YAML FILE -> STATIC, NOT DYNAMIC
+    // ----- OLD APPROACH: RELIES ON YAML FILE -> STATIC, NOT DYNAMIC
     /*
     private PaymentService paymentService; // ----- OLD METHOD: RELIES ON YAML FILE -> STATIC, NOT DYNAMIC
 

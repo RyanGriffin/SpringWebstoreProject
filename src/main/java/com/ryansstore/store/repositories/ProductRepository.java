@@ -48,21 +48,21 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
     // Find products whose prices are in a given range and sort by name
     List<Product> findByPriceBetweenOrderByName(BigDecimal minPrice, BigDecimal maxPrice);
 
-    // above query is a little long, so we can do this with the @Query annotation...
-    // can be SQL or JPQL
-    // Also can be stored procedure, like below
-    @Procedure("findProductsByPrice")
-    List<Product> findProducts(BigDecimal minPrice, BigDecimal maxPrice);
+    // above method name is a lil long, so we can write our own with the @Query
+    // Custom queries can be written in JPQL (like this one) or SQL
+    @Query("select p.id, p.name from Product p where p.category = :category")
+    List<ProductSummary> findByCategory(@Param("category") Category category);
 
-    // can also use aggregate function...
+    // can also use aggregate function (also an example of SQL)
     @Query(value = "SELECT COUNT(*) FROM products p WHERE p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.name", nativeQuery = true)
     List<Product> countProducts(@Param("minPrice") BigDecimal minPrice, @Param("maxPrice") BigDecimal maxPrice);
 
-    // and use this to update! (Using JPQL for this)
+    // and use @Modifying to update!
     @Modifying
     @Query(value = "UPDATE Product p SET p.price = p.price + :newPrice WHERE p.category.id = :categoryID")
     void updatePriceByCategory(@Param("newPrice") BigDecimal newPrice, @Param("categoryID") Byte categoryID);
 
-    @Query("select p.id, p.name from Product p where p.category = :category")
-    List<ProductSummary> findByCategory(@Param("category") Category category);
+    // Also can be stored procedure, like below
+    @Procedure("findProductsByPrice")
+    List<Product> findProducts(BigDecimal minPrice, BigDecimal maxPrice);
 }

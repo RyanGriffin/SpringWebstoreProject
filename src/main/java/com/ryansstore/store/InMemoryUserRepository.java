@@ -6,23 +6,21 @@ import java.util.HashMap;
 /*import org.springframework.stereotype.Repository;
 
 @Repository*/
-public class InMemoryUserRepository implements UserRepository {
-    private HashMap<String, User> users;
+public class InMemoryUserRepository implements PojoUserRepository {
+    private HashMap<String, PojoUser> users;
 
-    public InMemoryUserRepository() {
-        users = new HashMap<>();
-    }
+    public InMemoryUserRepository() { users = new HashMap<>(); }
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(PojoUser user) {
         users.put(user.getEmail(), user);
         System.out.println("User " + user.getName() + " with email " + user.getEmail() + " has been saved!");
     }
 
     @Override
-    public boolean userExists(User user) {
+    public boolean userExists(PojoUser user) {
         if(users.containsKey(user.getEmail())) {
-            System.out.println("ERROR: User " + user.getName() + " with email " + user.getEmail() + " already exists!");
+            System.err.println("ERROR: PojoUser " + user.getName() + " with email " + user.getEmail() + " already exists!");
             return true;
         }
         return false;

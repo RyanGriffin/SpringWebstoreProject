@@ -5,14 +5,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class User {
+public class PojoUser {
     private long id;
     private String email;
     private String password;
     private String name;
     private String phoneNumber;
 
-    public User(long id, String email, String password, String name, String phoneNumber) {
+    public PojoUser(long id, String email, String password, String name, String phoneNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
