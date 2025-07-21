@@ -20,8 +20,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    // NOTE: nullable = "false" is redundant here, this is already handled in db
-    @Column(nullable = false, name = "name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "email")
@@ -40,15 +39,6 @@ public class User {
     private List<Address> addresses = new ArrayList<>();
 
     @ManyToMany
-    @Builder.Default
-    @JoinTable(
-            name = "user_tags",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    private Set<Tag> tags = new HashSet<>();
-
-    @ManyToMany
     @JoinTable(
             name = "wishlist",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -64,17 +54,6 @@ public class User {
     public void removeAddress(Address address) {
         addresses.remove(address);
         address.setUser(null);
-    }
-
-    public void addTag(String tagName) {
-        var tag = new Tag(tagName);
-        tags.add(tag);
-        tag.getUsers().add(this);
-    }
-
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
-        tag.getUsers().remove(this);
     }
 
     @Override
