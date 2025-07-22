@@ -1,6 +1,5 @@
 package com.ryansstore.store.repositories;
 
-import com.ryansstore.store.dtos.ProductSummary;
 import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -51,7 +50,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // above method name is a lil long, so we can write our own with the @Query
     // Custom queries can be written in JPQL (like this one) or SQL
     @Query("select p.id, p.name from Product p where p.category = :category")
-    List<ProductSummary> findByCategory(@Param("category") Category category);
+    List<Product> findByCategory(@Param("category") Category category);
 
     // can also use aggregate function (also an example of SQL)
     @Query(value = "SELECT COUNT(*) FROM products p WHERE p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.name", nativeQuery = true)
