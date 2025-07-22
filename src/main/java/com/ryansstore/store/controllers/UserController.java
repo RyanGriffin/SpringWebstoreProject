@@ -20,7 +20,7 @@ public class UserController {
 
     // method: GET
     @GetMapping // similar to @RequestMapping
-    public List<UserDto> getAllUsers(@RequestParam(required = false, defaultValue = "", name = "sort") String sort) {
+    public List<UserDto> getAllUsers(@RequestParam(name = "sort", defaultValue = "", required = false) String sort) {
         if(!Set.of("name", "email").contains(sort)) // if parameter isn't valid...
             sort = "name"; // ...set to default value (name in this case)
 
@@ -41,5 +41,10 @@ public class UserController {
         // This is how we would pass a DTO without using a mapper
         // UserDto userDto = new UserDto(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber());
         // return ResponseEntity.ok(userDto);
+    }
+
+    @PostMapping
+    public UserDto createUser(@RequestBody UserDto data) {
+        return data;
     }
 }
