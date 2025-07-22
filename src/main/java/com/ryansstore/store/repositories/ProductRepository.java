@@ -1,17 +1,21 @@
 package com.ryansstore.store.repositories;
 
-import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
+    @EntityGraph(attributePaths = "category")
+    List<Product> findByCategoryId(Byte id);
+
+    @EntityGraph(attributePaths = "category")
+    @Query("SELECT p FROM Product p")
+    List<Product> findAllWithCategory();
+
+    // Example Derived Query methods:
+    /*
     // Strings!
     List<Product> findByName(String name); // SELECT * FROM products WHERE name = ?
     List<Product> findByNameLike(String name); // SELECT * FROM products WHERE name LIKE ?
@@ -44,8 +48,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findTop5ByName(String name);
     List<Product> findFirst5ByNameLikeOrderByPrice(String name);
 
-    // Find products whose prices are in a given range and sort by name
-    List<Product> findByPriceBetweenOrderByName(BigDecimal minPrice, BigDecimal maxPrice);
+    // Find first 5 products whose prices are in a given range and sort by name
+    List<Product> findFirst5ByPriceBetweenOrderByNameDesc(BigDecimal minPrice, BigDecimal maxPrice);
 
     // above method name is a lil long, so we can write our own with the @Query
     // Custom queries can be written in JPQL (like this one) or SQL
@@ -64,11 +68,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // Also can be stored procedure, like below
     @Procedure("findProductsByPrice")
     List<Product> findProducts(BigDecimal minPrice, BigDecimal maxPrice);
-
-    @EntityGraph(attributePaths = "category")
-    List<Product> findByCategoryId(Byte id);
-
-    @EntityGraph(attributePaths = "category")
-    @Query("SELECT p FROM Product p")
-    List<Product> findAllWithCategory();
+     */
 }
