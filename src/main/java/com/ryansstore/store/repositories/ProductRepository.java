@@ -3,6 +3,7 @@ package com.ryansstore.store.repositories;
 import com.ryansstore.store.dtos.ProductSummary;
 import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -64,4 +65,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // Also can be stored procedure, like below
     @Procedure("findProductsByPrice")
     List<Product> findProducts(BigDecimal minPrice, BigDecimal maxPrice);
+
+    @EntityGraph(attributePaths = "category")
+    List<Product> findByCategoryId(Byte id);
+
+    @EntityGraph(attributePaths = "category")
+    @Query("SELECT p FROM Product p")
+    List<Product> findAllWithCategory();
 }
