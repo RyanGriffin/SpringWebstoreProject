@@ -3,7 +3,7 @@ package com.ryansstore.store.dtos;
 import lombok.Data;
 
 @Data
-public class RegisterUserRequest {
+public class UserRegisterRequest {
     private String name;
     private String email;
     private String phoneNumber;

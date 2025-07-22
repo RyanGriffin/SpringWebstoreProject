@@ -1,16 +1,15 @@
 package com.ryansstore.store.controllers;
 
-import com.ryansstore.store.dtos.RegisterUserRequest;
-import com.ryansstore.store.mappers.UserMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.entities.User;
 import com.ryansstore.store.dtos.UserDto;
+import com.ryansstore.store.dtos.UserRegisterRequest;
+import com.ryansstore.store.mappers.UserMapper;
 import com.ryansstore.store.repositories.UserRepository;
-import org.springframework.web.util.UriComponentsBuilder;
-
+import lombok.AllArgsConstructor;
 import java.net.URI;
 import java.util.List;
 import java.util.Set;
@@ -48,9 +47,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(
-            @RequestBody RegisterUserRequest request,
-            UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserDto> createUser(@RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
         User newUser = userMapper.toEntity(request);
         userRepository.save(newUser);
         UserDto userDto = userMapper.toDto(newUser);
