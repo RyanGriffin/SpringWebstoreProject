@@ -1,11 +1,12 @@
 package com.ryansstore.store.controllers;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Sort;
 import com.ryansstore.store.entities.User;
 import com.ryansstore.store.dtos.UserDto;
+import com.ryansstore.store.dtos.UserUpdateRequest;
 import com.ryansstore.store.dtos.UserRegisterRequest;
 import com.ryansstore.store.mappers.UserMapper;
 import com.ryansstore.store.repositories.UserRepository;
@@ -53,5 +54,17 @@ public class UserController {
         UserDto userDto = userMapper.toDto(newUser);
         URI uri =  uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
         return ResponseEntity.created(uri).body(userDto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") Long id, @RequestBody UserUpdateRequest request) {
+        User user = userRepository.findById(id).orElse(null);
+        if(user == null)
+            return ResponseEntity.notFound().build();
+
+        userMapper.updateEntity(request, user);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(userMapper.toDto(user));
     }
 }
