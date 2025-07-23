@@ -2,9 +2,9 @@ package com.ryansstore.store.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import com.ryansstore.store.entities.Product;
 import com.ryansstore.store.dtos.ProductDto;
-import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
@@ -13,5 +13,6 @@ public interface ProductMapper {
 
     Product toEntity(ProductDto productDto);
 
+    @Mapping(target = "id", ignore = true)
     void updateEntity(ProductDto productDto, @MappingTarget Product product);
 }
