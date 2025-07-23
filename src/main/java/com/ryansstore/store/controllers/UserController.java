@@ -52,9 +52,12 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
         User newUser = userMapper.toEntity(request);
+
         userRepository.save(newUser);
+
         UserDto userDto = userMapper.toDto(newUser);
         URI uri =  uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
+
         return ResponseEntity.created(uri).body(userDto);
     }
 
@@ -77,6 +80,7 @@ public class UserController {
             return ResponseEntity.notFound().build();
 
         userRepository.delete(user);
+
         return ResponseEntity.noContent().build();
     }
 
