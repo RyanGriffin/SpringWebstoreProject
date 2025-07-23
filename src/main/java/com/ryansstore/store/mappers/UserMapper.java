@@ -10,6 +10,8 @@ import com.ryansstore.store.entities.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserDto toDto(User user);
+
     User toEntity(UserRegisterRequest request);
+
     void updateEntity(UserUpdateRequest request, @MappingTarget User user);
 }

@@ -11,7 +11,6 @@ public interface ProductMapper {
     @Mapping(target = "categoryId", expression = "java(product.getCategory().getId())")
     ProductDto toDto(Product product);
 
-    @Mapping(target = "category", ignore = true)
     Product toEntity(ProductDto productDto);
 
     void updateEntity(ProductDto productDto, @MappingTarget Product product);
