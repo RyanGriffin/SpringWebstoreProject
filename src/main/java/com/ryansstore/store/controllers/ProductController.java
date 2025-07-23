@@ -1,6 +1,8 @@
 package com.ryansstore.store.controllers;
 
+import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.entities.Product;
+import com.ryansstore.store.repositories.CategoryRepository;
 import org.springframework.web.bind.annotation.*;
 import com.ryansstore.store.repositories.ProductRepository;
 import com.ryansstore.store.mappers.ProductMapper;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     public final ProductRepository productRepository;
+    public final CategoryRepository categoryRepository;
     public final ProductMapper productMapper;
 
     @GetMapping
@@ -38,5 +41,20 @@ public class ProductController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(productMapper.toDto(product));
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+        System.out.println(productDto);
+        if(productDto == null)
+            return ResponseEntity.badRequest().build();
+
+        Product product = productMapper.toEntity(productDto);
+        product.setCategory(categoryRepository.findById(productDto.getCategoryId()).orElseThrow(() -> new RuntimeException("Invalid category ID")));
+
+        productRepository.save(product);
+        productDto.setId(product.getId());
+
+        return ResponseEntity.ok(productDto);
     }
 }

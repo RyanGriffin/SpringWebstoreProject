@@ -2,11 +2,14 @@ package com.ryansstore.store.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import com.ryansstore.store.dtos.ProductDto;
 import com.ryansstore.store.entities.Product;
+import com.ryansstore.store.dtos.ProductDto;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
     @Mapping(target = "categoryId", expression = "java(product.getCategory().getId())")
     ProductDto toDto(Product product);
+
+    @Mapping(target = "category", ignore = true)
+    Product toEntity(ProductDto productDto);
 }
