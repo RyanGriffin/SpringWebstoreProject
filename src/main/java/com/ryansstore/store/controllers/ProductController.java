@@ -1,5 +1,6 @@
 package com.ryansstore.store.controllers;
 
+import com.ryansstore.store.entities.Category;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -46,18 +47,35 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, UriComponentsBuilder uriBuilder) {
-        System.out.println(productDto);
-        if(productDto == null)
+        Category category = categoryRepository.findById(productDto.getCategoryId()).orElse(null);
+        if(category == null)
             return ResponseEntity.badRequest().build();
 
         Product product = productMapper.toEntity(productDto);
-        product.setCategory(categoryRepository.findById(productDto.getCategoryId()).orElseThrow(() -> new RuntimeException("Invalid category ID")));
-
+        product.setCategory(category);
         productRepository.save(product);
         productDto.setId(product.getId());
 
         URI uri =  uriBuilder.path("/products/{id}").buildAndExpand(productDto.getId()).toUri();
 
         return ResponseEntity.created(uri).body(productDto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable(name = "id") Long id, @RequestBody ProductDto productDto) {
+        Category category = categoryRepository.findById(productDto.getCategoryId()).orElse(null);
+        if(category == null)
+            return ResponseEntity.badRequest().build();
+
+        Product product = productRepository.findById(id).orElse(null);
+        if(product == null)
+            return ResponseEntity.notFound().build();
+
+        productMapper.updateEntity(productDto, product);
+        product.setCategory(category);
+        productRepository.save(product);
+        productDto.setId(product.getId());
+
+        return ResponseEntity.ok(productDto);
     }
 }
