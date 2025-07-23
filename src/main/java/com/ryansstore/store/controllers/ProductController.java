@@ -1,14 +1,15 @@
 package com.ryansstore.store.controllers;
 
-import com.ryansstore.store.entities.Category;
-import com.ryansstore.store.entities.Product;
-import com.ryansstore.store.repositories.CategoryRepository;
 import org.springframework.web.bind.annotation.*;
-import com.ryansstore.store.repositories.ProductRepository;
-import com.ryansstore.store.mappers.ProductMapper;
-import com.ryansstore.store.dtos.ProductDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponentsBuilder;
+import com.ryansstore.store.entities.Product;
+import com.ryansstore.store.dtos.ProductDto;
+import com.ryansstore.store.mappers.ProductMapper;
+import com.ryansstore.store.repositories.ProductRepository;
+import com.ryansstore.store.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
+import java.net.URI;
 import java.util.List;
 
 @AllArgsConstructor
@@ -44,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, UriComponentsBuilder uriBuilder) {
         System.out.println(productDto);
         if(productDto == null)
             return ResponseEntity.badRequest().build();
@@ -55,6 +56,8 @@ public class ProductController {
         productRepository.save(product);
         productDto.setId(product.getId());
 
-        return ResponseEntity.ok(productDto);
+        URI uri =  uriBuilder.path("/products/{id}").buildAndExpand(productDto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(productDto);
     }
 }
