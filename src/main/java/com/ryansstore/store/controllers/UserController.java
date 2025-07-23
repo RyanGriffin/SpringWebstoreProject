@@ -9,7 +9,7 @@ import com.ryansstore.store.entities.User;
 import com.ryansstore.store.dtos.UserDto;
 import com.ryansstore.store.dtos.UserRegisterRequest;
 import com.ryansstore.store.dtos.UserUpdateRequest;
-import com.ryansstore.store.dtos.ChangePasswordRequest;
+import com.ryansstore.store.dtos.UserChangePasswordRequest;
 import com.ryansstore.store.mappers.UserMapper;
 import com.ryansstore.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -81,7 +81,7 @@ public class UserController {
     }
 
     @PostMapping("/{id}/change-password")
-    public ResponseEntity<Void> changePassword(@PathVariable(name = "id") Long id, @RequestBody ChangePasswordRequest request) {
+    public ResponseEntity<Void> changePassword(@PathVariable(name = "id") Long id, @RequestBody UserChangePasswordRequest request) {
         User user = userRepository.findById(id).orElse(null);
         if(user == null) // return 404 if user doesn't exist
             return ResponseEntity.notFound().build();
