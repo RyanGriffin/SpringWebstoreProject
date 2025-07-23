@@ -29,6 +29,5 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
-    @ToString.Exclude
     private Category category;
 }

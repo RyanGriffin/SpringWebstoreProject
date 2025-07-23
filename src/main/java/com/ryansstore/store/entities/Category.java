@@ -22,13 +22,9 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    @Builder.Default
     private Set<Product> products = new HashSet<>();
 
     public Category(byte id) { this.id = id; }
 
-    public void addProduct(Product product) {
-        products.add(product);
-        product.setCategory(this);
-    }
+    public Category(String name) { this.name = name; }
 }
