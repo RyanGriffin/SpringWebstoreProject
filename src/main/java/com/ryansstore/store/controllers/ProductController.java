@@ -1,10 +1,10 @@
 package com.ryansstore.store.controllers;
 
-import com.ryansstore.store.entities.Category;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 import com.ryansstore.store.entities.Product;
+import com.ryansstore.store.entities.Category;
 import com.ryansstore.store.dtos.ProductDto;
 import com.ryansstore.store.mappers.ProductMapper;
 import com.ryansstore.store.repositories.ProductRepository;
@@ -77,5 +77,16 @@ public class ProductController {
         productDto.setId(product.getId());
 
         return ResponseEntity.ok(productDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable(name = "id") Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        if(product == null)
+            return ResponseEntity.notFound().build();
+
+        productRepository.delete(product);
+
+        return ResponseEntity.noContent().build();
     }
 }
