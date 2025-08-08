@@ -24,8 +24,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    // method: GET
-    @GetMapping // similar to @RequestMapping
+    @GetMapping
     public List<UserDto> getAllUsers(@RequestParam(name = "sort", defaultValue = "", required = false) String sort) {
         if(!Set.of("name", "email").contains(sort)) // if parameter isn't valid...
             sort = "name"; // ...set to default value (name in this case)
