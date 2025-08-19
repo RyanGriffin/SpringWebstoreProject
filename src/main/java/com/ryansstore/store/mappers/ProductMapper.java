@@ -2,7 +2,6 @@ package com.ryansstore.store.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
 import org.mapstruct.MappingTarget;
 import com.ryansstore.store.entities.Product;
 import com.ryansstore.store.dtos.ProductDto;
