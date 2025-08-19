@@ -43,7 +43,7 @@ public class UserController {
 
         return ResponseEntity.ok(userMapper.toDto(user));
 
-        // This is how we would pass a DTO without using a mapper
+        // This is how we would pass a DTO without using a mapper:
         // UserDto userDto = new UserDto(user.getId(), user.getName(), user.getEmail(), user.getPhoneNumber());
         // return ResponseEntity.ok(userDto);
     }
