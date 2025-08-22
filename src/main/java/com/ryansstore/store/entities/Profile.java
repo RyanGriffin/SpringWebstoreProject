@@ -1,8 +1,8 @@
 package com.ryansstore.store.entities;
 
-import java.time.LocalDate;
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDate;
 
 @Setter
 @Getter
