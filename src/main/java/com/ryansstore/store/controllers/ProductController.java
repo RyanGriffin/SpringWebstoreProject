@@ -72,9 +72,9 @@ public class ProductController {
             return ResponseEntity.notFound().build();
 
         productMapper.updateEntity(productDto, product);
+        productDto.setId(product.getId());
         product.setCategory(category);
         productRepository.save(product);
-        productDto.setId(product.getId());
 
         return ResponseEntity.ok(productDto);
     }
