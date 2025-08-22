@@ -1,11 +1,11 @@
 package com.ryansstore.store.mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import com.ryansstore.store.entities.User;
+import com.ryansstore.store.dtos.UserDto;
 import com.ryansstore.store.dtos.UserUpdateRequest;
 import com.ryansstore.store.dtos.UserRegisterRequest;
-import com.ryansstore.store.dtos.UserDto;
-import com.ryansstore.store.entities.User;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
