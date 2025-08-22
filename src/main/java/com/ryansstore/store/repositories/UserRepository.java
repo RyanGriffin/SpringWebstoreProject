@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ryansstore.store.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    // unused methods, saving for reference:
+    // saving for later reference:
     /*
     @EntityGraph(attributePaths = "addresses")
     @Query("select u from User u")
