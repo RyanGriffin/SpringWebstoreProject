@@ -1,7 +1,7 @@
 package com.ryansstore.store.repositories;
 
-import com.ryansstore.store.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.ryansstore.store.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     // unused methods, saving for reference:
