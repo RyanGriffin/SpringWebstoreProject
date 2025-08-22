@@ -22,14 +22,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByNameNotLike(String name); // SELECT * FROM products WHERE name NOT LIKE ?
     List<Product> findByNameContaining(String name);
     List<Product> findByNameStartingWith(String name);
-    List<Product> findByNameEndingWith(String name);
     List<Product> findByNameEndingWithIgnoreCase(String name);
 
     // Numbers
     List<Product> findByPrice(BigDecimal price);
     List<Product> findByPriceGreaterThan(BigDecimal price);
-    List<Product> findByPriceGreaterThanEqual(BigDecimal price);
-    List<Product> findByPriceLessThan(BigDecimal price);
     List<Product> findByPriceLessThanEqual(BigDecimal price);
     List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
 
