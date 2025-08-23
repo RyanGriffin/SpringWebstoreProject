@@ -4,8 +4,7 @@ import com.ryansstore.store.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    // saving for later reference:
-    /*
+    /* saving for later reference:
     @EntityGraph(attributePaths = "addresses")
     @Query("select u from User u")
     List<User> findAllWithAddresses();
