@@ -13,9 +13,9 @@ import com.ryansstore.store.dtos.UserChangePasswordRequest;
 import com.ryansstore.store.mappers.UserMapper;
 import com.ryansstore.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import java.net.URI;
 import java.util.List;
 import java.util.Set;
+import java.net.URI;
 
 @AllArgsConstructor
 @RestController
