@@ -10,8 +10,8 @@ import com.ryansstore.store.mappers.ProductMapper;
 import com.ryansstore.store.repositories.ProductRepository;
 import com.ryansstore.store.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
-import java.net.URI;
 import java.util.List;
+import java.net.URI;
 
 @AllArgsConstructor
 @RestController
