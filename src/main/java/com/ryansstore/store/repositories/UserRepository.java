@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
-    /* saving for later reference:
-    @EntityGraph(attributePaths = "addresses")
+    // saving for later reference: (@EntityGraph and custom queries w/ @Query)
+    /*@EntityGraph(attributePaths = "addresses")
     @Query("select u from User u")
     List<User> findAllWithAddresses();
 
