@@ -2,10 +2,8 @@ package com.ryansstore.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Date;
-import java.util.UUID;
-import java.util.Set;
-import java.util.HashSet;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Getter
 @Setter
@@ -23,6 +21,13 @@ public class Cart {
     @Column(name = "date_created", insertable = false, updatable = false)
     private Date dateCreated;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE)
-    private Set<CartItem> cartItems = new HashSet<>();
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Set<CartItem> items = new HashSet<>();
+
+    public BigDecimal getTotalPrice() {
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        for(CartItem cartItem : items)
+            totalPrice = totalPrice.add(cartItem.getTotalPrice());
+        return totalPrice;
+    }
 }
