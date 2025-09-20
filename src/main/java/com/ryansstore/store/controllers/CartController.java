@@ -21,8 +21,8 @@ import java.util.UUID;
 @RequestMapping("/carts")
 public class CartController {
     private final CartRepository cartRepository;
-    private final CartMapper cartMapper;
     private final ProductRepository productRepository;
+    private final CartMapper cartMapper;
 
     @PostMapping
     public ResponseEntity<CartDto> createCart(UriComponentsBuilder uriBuilder) {
