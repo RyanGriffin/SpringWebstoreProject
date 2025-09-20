@@ -30,11 +30,5 @@ public class CartItem {
     @Builder.Default
     private int quantity = 1;
 
-    public CartItem(Cart cart, Product product) {
-        this.cart = cart;
-        this.product = product;
-        this.quantity = 1;
-    }
-
     public BigDecimal getTotalPrice() { return product.getPrice().multiply(BigDecimal.valueOf(quantity)); }
 }
