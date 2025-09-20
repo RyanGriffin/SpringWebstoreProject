@@ -13,6 +13,7 @@ import com.ryansstore.store.dtos.UserChangePasswordRequest;
 import com.ryansstore.store.mappers.UserMapper;
 import com.ryansstore.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Set;
 import java.net.URI;
@@ -23,6 +24,18 @@ import java.net.URI;
 public class UserController {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+
+    @PostMapping
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
+        User newUser = userMapper.toEntity(request);
+
+        userRepository.save(newUser);
+
+        UserDto userDto = userMapper.toDto(newUser);
+        URI uri =  uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(userDto);
+    }
 
     @GetMapping
     public List<UserDto> getAllUsers(@RequestParam(name = "sort", defaultValue = "", required = false) String sort) {
@@ -42,18 +55,6 @@ public class UserController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(userMapper.toDto(user));
-    }
-
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
-        User newUser = userMapper.toEntity(request);
-
-        userRepository.save(newUser);
-
-        UserDto userDto = userMapper.toDto(newUser);
-        URI uri =  uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(userDto);
     }
 
     @PutMapping("/{id}")
