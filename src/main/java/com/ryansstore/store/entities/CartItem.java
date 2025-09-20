@@ -2,8 +2,6 @@ package com.ryansstore.store.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.List;
-import java.util.ArrayList;
 
 @Getter
 @Setter
