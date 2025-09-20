@@ -1,11 +1,11 @@
 package com.ryansstore.store.controllers;
 
-import com.ryansstore.store.dtos.CartItemDto;
 import com.ryansstore.store.entities.Cart;
 import com.ryansstore.store.entities.CartItem;
 import com.ryansstore.store.entities.Product;
-import com.ryansstore.store.dtos.CartAddItemRequest;
 import com.ryansstore.store.dtos.CartDto;
+import com.ryansstore.store.dtos.CartItemDto;
+import com.ryansstore.store.dtos.CartAddItemRequest;
 import com.ryansstore.store.mappers.CartMapper;
 import com.ryansstore.store.repositories.CartRepository;
 import com.ryansstore.store.repositories.ProductRepository;
@@ -38,8 +38,7 @@ public class CartController {
     @PostMapping("/{cartId}/items")
     public ResponseEntity<CartItemDto> addToCart(
             @PathVariable UUID cartId,
-            @RequestBody CartAddItemRequest cartAddItemRequest,
-            UriComponentsBuilder uriBuilder) {
+            @RequestBody CartAddItemRequest cartAddItemRequest) {
         Cart cart = cartRepository.findById(cartId).orElse(null);
         if(cart == null) // return 404 if cart doesn't exist
             return ResponseEntity.notFound().build();
@@ -56,18 +55,16 @@ public class CartController {
         if(cartItem != null)
             cartItem.setQuantity(cartItem.getQuantity() + 1);
         else {
-            cartItem = new CartItem();
-            cartItem.setProduct(product);
-            cartItem.setQuantity(1);
-            cartItem.setCart(cart);
+            cartItem = CartItem.builder()
+                    .cart(cart)
+                    .product(product)
+                    .build();
+
             cart.getCartItems().add(cartItem);
         }
 
         cartRepository.save(cart);
 
-        CartItemDto cartItemDto = cartMapper.toDto(cartItem);
-        URI uri =  uriBuilder.path("/carts/{id}/items").buildAndExpand(cartItemDto.getProduct().getId()).toUri();
-
-        return ResponseEntity.created(uri).body(cartItemDto);
+        return ResponseEntity.status(201).body(cartMapper.toDto(cartItem));
     }
 }
