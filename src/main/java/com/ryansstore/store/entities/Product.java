@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@ToString
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
