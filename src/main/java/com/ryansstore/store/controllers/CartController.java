@@ -15,7 +15,7 @@ public class CartController {
     private final CartRepository cartRepository;
 
     @PostMapping
-    public ResponseEntity<Cart> createCart(@RequestBody Cart cart, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Cart> createCart(UriComponentsBuilder uriBuilder) {
         Cart newCart = new Cart();
         cartRepository.save(newCart);
 
