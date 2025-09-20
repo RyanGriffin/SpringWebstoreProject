@@ -18,6 +18,6 @@ public class Cart {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", insertable = false, updatable = false)
     private Date dateCreated;
 }
