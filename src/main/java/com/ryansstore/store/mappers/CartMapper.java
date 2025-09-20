@@ -4,7 +4,7 @@ import com.ryansstore.store.entities.Cart;
 import com.ryansstore.store.dtos.CartDto;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CartMapper {
     CartDto toDto(Cart cart);
 }
