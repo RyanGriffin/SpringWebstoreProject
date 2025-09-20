@@ -1,5 +1,6 @@
 package com.ryansstore.store.dtos;
 
+import com.ryansstore.store.validation.Lowercase;
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -13,6 +14,7 @@ public class UserRegisterRequest {
 
     @NotBlank(message = "email is required!")
     @Email(message = "email must be valid!")
+    @Lowercase(message = "email must be lowercase!")
     private String email;
 
     @NotBlank(message = "phone number is required!")
