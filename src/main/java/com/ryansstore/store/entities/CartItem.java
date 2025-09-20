@@ -25,5 +25,12 @@ public class CartItem {
     private Product product;
 
     @Column(name = "quantity")
-    private int quantity;
+    @Builder.Default
+    private int quantity = 1;
+
+    public CartItem(Cart cart, Product product) {
+        this.cart = cart;
+        this.product = product;
+        this.quantity = 1;
+    }
 }
