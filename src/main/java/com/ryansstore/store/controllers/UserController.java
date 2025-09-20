@@ -1,10 +1,5 @@
 package com.ryansstore.store.controllers;
 
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.data.domain.Sort;
 import com.ryansstore.store.entities.User;
 import com.ryansstore.store.dtos.UserDto;
 import com.ryansstore.store.dtos.UserRegisterRequest;
@@ -12,6 +7,11 @@ import com.ryansstore.store.dtos.UserUpdateRequest;
 import com.ryansstore.store.dtos.UserChangePasswordRequest;
 import com.ryansstore.store.mappers.UserMapper;
 import com.ryansstore.store.repositories.UserRepository;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Sort;
 import lombok.AllArgsConstructor;
 import jakarta.validation.Valid;
 import java.util.List;
