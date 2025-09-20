@@ -18,8 +18,8 @@ import java.util.Date;
 public class Cart {
     @Id
     @Column(name = "id")
-    String id;
+    private String id;
 
     @Column(name = "date_created")
-    Date dateCreated;
+    private Date dateCreated;
 }
