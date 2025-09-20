@@ -1,10 +1,10 @@
 package com.ryansstore.store.mappers;
 
-import com.ryansstore.store.dtos.CartItemDto;
-import com.ryansstore.store.entities.CartItem;
 import org.mapstruct.Mapper;
 import com.ryansstore.store.entities.Cart;
 import com.ryansstore.store.dtos.CartDto;
+import com.ryansstore.store.entities.CartItem;
+import com.ryansstore.store.dtos.CartItemDto;
 
 @Mapper(componentModel = "spring")
 public interface CartMapper {
