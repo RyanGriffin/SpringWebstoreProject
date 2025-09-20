@@ -36,7 +36,7 @@ public class CartController {
     }
 
     @GetMapping("/{cartId}")
-    public ResponseEntity<CartDto> getCart(@PathVariable UUID cartId, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<CartDto> getCart(@PathVariable UUID cartId) {
         Cart cart = cartRepository.getCartWithItems(cartId).orElse(null);
         if (cart == null)
             return ResponseEntity.notFound().build();
