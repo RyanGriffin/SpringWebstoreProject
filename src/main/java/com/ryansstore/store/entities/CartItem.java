@@ -3,6 +3,8 @@ package com.ryansstore.store.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,4 +35,6 @@ public class CartItem {
         this.product = product;
         this.quantity = 1;
     }
+
+    public BigDecimal getTotalPrice() { return product.getPrice().multiply(BigDecimal.valueOf(quantity)); }
 }
