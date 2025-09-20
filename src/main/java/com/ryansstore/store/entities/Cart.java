@@ -3,6 +3,7 @@ package com.ryansstore.store.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private String id;
+    private UUID id;
 
     @Column(name = "date_created")
     private Date dateCreated;
