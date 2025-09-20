@@ -15,6 +15,7 @@ import com.ryansstore.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.net.URI;
 
@@ -26,7 +27,13 @@ public class UserController {
     private final UserMapper userMapper;
 
     @PostMapping
-    public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
+        if(userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body(
+                    Map.of("email", "email is already registered!")
+            );
+        }
+
         User newUser = userMapper.toEntity(request);
 
         userRepository.save(newUser);

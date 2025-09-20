@@ -4,6 +4,7 @@ import com.ryansstore.store.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    boolean existsByEmail(String email);
     /* saving for later reference:
     @EntityGraph(attributePaths = "addresses")
     @Query("select u from User u")
