@@ -18,11 +18,9 @@ public class CartItem {
     @Column(name = "id")
     private long id;
 
-    @OneToMany( mappedBy = "cart_id",
-                cascade = CascadeType.REMOVE,
-                orphanRemoval = true)
-    @Builder.Default
-    private List<Cart> cart = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "product_id")
