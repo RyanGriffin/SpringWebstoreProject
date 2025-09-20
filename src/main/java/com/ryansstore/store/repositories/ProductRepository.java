@@ -2,8 +2,8 @@ package com.ryansstore.store.repositories;
 
 import com.ryansstore.store.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.EntityGraph;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
@@ -14,7 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p")
     List<Product> findAllWithCategory();
 
-    // Example of Derived Query methods:
+    // Examples of Derived Query methods:
     /*
     // Strings!
     List<Product> findByName(String name); // SELECT * FROM products WHERE name = ?
