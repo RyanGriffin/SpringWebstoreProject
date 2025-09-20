@@ -14,7 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p")
     List<Product> findAllWithCategory();
 
-    // Example Derived Query methods:
+    // Example of Derived Query methods:
     /*
     // Strings!
     List<Product> findByName(String name); // SELECT * FROM products WHERE name = ?
