@@ -1,5 +1,6 @@
 package com.ryansstore.store.controllers;
 
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.HttpStatus;
@@ -92,5 +93,10 @@ public class UserController {
         userRepository.save(user);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public ResponseEntity<String> handleValidationErrors(MethodArgumentNotValidException exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 }
