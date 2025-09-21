@@ -1,5 +1,6 @@
 package com.ryansstore.store.controllers;
 
+import com.ryansstore.store.dtos.CartItemQuantityRequest;
 import com.ryansstore.store.entities.Cart;
 import com.ryansstore.store.entities.CartItem;
 import com.ryansstore.store.entities.Product;
@@ -9,11 +10,14 @@ import com.ryansstore.store.dtos.CartAddItemRequest;
 import com.ryansstore.store.mappers.CartMapper;
 import com.ryansstore.store.repositories.CartRepository;
 import com.ryansstore.store.repositories.ProductRepository;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import lombok.AllArgsConstructor;
 import java.net.URI;
+import java.util.Map;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -75,5 +79,28 @@ public class CartController {
         cartRepository.save(cart);
 
         return ResponseEntity.status(201).body(cartMapper.toDto(cartItem));
+    }
+
+    @PutMapping("/{cartId}/items/{productId}")
+    public ResponseEntity<?> updateItemQuantity(
+            @PathVariable UUID cartId,
+            @PathVariable Long productId,
+            @Valid @RequestBody CartItemQuantityRequest request) {
+        Cart cart = cartRepository.getCartWithItems(cartId).orElse(null);
+        if(cart == null) // return 404 if cart doesn't exist
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "cart not found!"));
+
+        CartItem item = null;
+        for(CartItem cartItem : cart.getItems()) {
+            if(cartItem.getProduct().getId().equals(productId))
+                item = cartItem;
+        }
+        if(item == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "item not found!"));
+
+        item.setQuantity(request.getQuantity());
+        cartRepository.save(cart);
+
+        return ResponseEntity.ok(cartMapper.toDto(item));
     }
 }
