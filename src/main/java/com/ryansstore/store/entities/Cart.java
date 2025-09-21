@@ -68,4 +68,6 @@ public class Cart {
 
         return removed;
     }
+
+    public void clear() { items.clear(); }
 }
