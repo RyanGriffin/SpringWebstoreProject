@@ -49,6 +49,17 @@ public class CartController {
         return ResponseEntity.ok(cartMapper.toDto(cart));
     }
 
+    @DeleteMapping("/{cartId}/items")
+    public ResponseEntity<?> clearCart(@PathVariable UUID cartId) {
+        Cart cart = cartRepository.getCartWithItems(cartId).orElse(null);
+        if(cart == null) // return 404 if cart doesn't exist
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "cart not found!"));
+
+        cart.getItems().clear();
+        cartRepository.save(cart);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
     @PostMapping("/{cartId}/items")
     public ResponseEntity<CartItemDto> addToCart(
             @PathVariable UUID cartId,
