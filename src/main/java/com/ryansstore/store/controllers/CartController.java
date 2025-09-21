@@ -57,7 +57,7 @@ public class CartController {
 
         cart.clear();
         cartRepository.save(cart);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{cartId}/items")
@@ -92,7 +92,7 @@ public class CartController {
 
         if(cart.removeItem(productId)) {
             cartRepository.save(cart);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.noContent().build();
         }
 
         return ResponseEntity.notFound().build(); // item not in cart, return 404
