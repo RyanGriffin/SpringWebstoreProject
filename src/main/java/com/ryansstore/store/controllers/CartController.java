@@ -10,16 +10,17 @@ import com.ryansstore.store.dtos.CartAddItemRequest;
 import com.ryansstore.store.mappers.CartMapper;
 import com.ryansstore.store.repositories.CartRepository;
 import com.ryansstore.store.repositories.ProductRepository;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import java.net.URI;
 import java.util.Map;
 import java.util.UUID;
 
+@SuppressWarnings("DuplicatedCode")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/carts")
@@ -64,6 +65,26 @@ public class CartController {
         cartRepository.save(cart);
 
         return ResponseEntity.status(201).body(cartMapper.toDto(cartItem));
+    }
+
+    @DeleteMapping("/{cartId}/items/{productId}")
+    public ResponseEntity<?> removeFromCart(
+            @PathVariable UUID cartId,
+            @PathVariable Long productId) {
+        Cart cart = cartRepository.getCartWithItems(cartId).orElse(null);
+        if(cart == null) // return 404 if cart doesn't exist
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "cart not found!"));
+
+        CartItem item = cart.getItem(productId);
+        if(item == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "item not found!"));
+
+        if(cart.removeItem(productId)) {
+            cartRepository.save(cart);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        return ResponseEntity.notFound().build(); // item not in cart, return 404
     }
 
     @PutMapping("/{cartId}/items/{productId}")
