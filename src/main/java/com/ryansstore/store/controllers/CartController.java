@@ -60,19 +60,7 @@ public class CartController {
         if(product == null) // return 400 if product doesn't exist
             return ResponseEntity.badRequest().build();
 
-        CartItem cartItem = cart.getItem(product.getId());
-
-        if(cartItem != null)
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
-        else {
-            cartItem = CartItem.builder()
-                    .cart(cart)
-                    .product(product)
-                    .build();
-
-            cart.getItems().add(cartItem);
-        }
-
+        CartItem cartItem = cart.addItem(product);
         cartRepository.save(cart);
 
         return ResponseEntity.status(201).body(cartMapper.toDto(cartItem));

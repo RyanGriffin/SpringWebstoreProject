@@ -37,4 +37,20 @@ public class Cart {
                 .findFirst()
                 .orElse(null);
     }
+
+    public CartItem addItem(Product product) {
+        CartItem cartItem = getItem(product.getId());
+
+        if(cartItem != null)
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+        else {
+            cartItem = CartItem.builder()
+                    .product(product)
+                    .cart(this)
+                    .build();
+            items.add(cartItem);
+        }
+
+        return cartItem;
+    }
 }
