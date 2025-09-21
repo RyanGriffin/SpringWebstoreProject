@@ -30,4 +30,11 @@ public class Cart {
             totalPrice = totalPrice.add(cartItem.getTotalPrice());
         return totalPrice;
     }
+
+    public CartItem getItem(Long productId) {
+        return items.stream()
+                .filter(item -> item.getProduct().getId().equals(productId))
+                .findFirst()
+                .orElse(null);
+    }
 }

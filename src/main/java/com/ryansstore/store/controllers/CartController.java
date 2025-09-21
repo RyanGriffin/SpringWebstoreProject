@@ -60,10 +60,7 @@ public class CartController {
         if(product == null) // return 400 if product doesn't exist
             return ResponseEntity.badRequest().build();
 
-        CartItem cartItem = cart.getItems().stream()
-                .filter(item -> item.getProduct().getId().equals(product.getId()))
-                .findFirst()
-                .orElse(null);
+        CartItem cartItem = cart.getItem(product.getId());
 
         if(cartItem != null)
             cartItem.setQuantity(cartItem.getQuantity() + 1);
@@ -90,11 +87,7 @@ public class CartController {
         if(cart == null) // return 404 if cart doesn't exist
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "cart not found!"));
 
-        CartItem item = null;
-        for(CartItem cartItem : cart.getItems()) {
-            if(cartItem.getProduct().getId().equals(productId))
-                item = cartItem;
-        }
+        CartItem item = cart.getItem(productId);
         if(item == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "item not found!"));
 
