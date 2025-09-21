@@ -13,11 +13,14 @@ import com.ryansstore.store.exceptions.CartNotFoundException;
 import com.ryansstore.store.exceptions.ProductNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.net.URI;
 import java.util.Map;
 import java.util.UUID;
 
+
 @AllArgsConstructor
+@Tag(name = "Carts")
 @RestController
 @RequestMapping("/carts")
 public class CartController {

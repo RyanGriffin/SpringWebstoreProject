@@ -12,14 +12,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Sort;
-import lombok.AllArgsConstructor;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.net.URI;
 
 @AllArgsConstructor
+@Tag(name = "Users")
 @RestController
 @RequestMapping("/users")
 public class UserController {

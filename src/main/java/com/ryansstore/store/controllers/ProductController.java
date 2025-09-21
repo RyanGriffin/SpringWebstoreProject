@@ -10,10 +10,12 @@ import com.ryansstore.store.mappers.ProductMapper;
 import com.ryansstore.store.repositories.ProductRepository;
 import com.ryansstore.store.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.net.URI;
 
 @AllArgsConstructor
+@Tag(name = "Products")
 @RestController
 @RequestMapping("/products")
 public class ProductController {
