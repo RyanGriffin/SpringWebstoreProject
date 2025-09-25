@@ -1,10 +1,10 @@
 package com.ryansstore.store.dtos;
 
-import com.ryansstore.store.validation.Lowercase;
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Email;
+import com.ryansstore.store.validation.Lowercase;
 
 @Data
 public class UserRegisterRequest {
