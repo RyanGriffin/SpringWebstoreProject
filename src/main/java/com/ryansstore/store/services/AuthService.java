@@ -14,8 +14,6 @@ public class AuthService {
     public boolean loginSuccessful(String email, String password) {
         User user = userRepository.findByEmail(email).orElse(null);
 
-        // boolean passwordMatch = BCrypt.checkpw(password, user.getPassword());
-
         return user != null && BCrypt.checkpw(password, user.getPassword());
     }
 }
