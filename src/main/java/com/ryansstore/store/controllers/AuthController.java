@@ -1,8 +1,7 @@
 package com.ryansstore.store.controllers;
 
-import com.ryansstore.store.dtos.LoginRequest;
-import com.ryansstore.store.repositories.UserRepository;
 import com.ryansstore.store.services.AuthService;
+import com.ryansstore.store.dtos.LoginRequest;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
