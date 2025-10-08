@@ -22,6 +22,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain springSecureFilterChain(HttpSecurity http) throws Exception {
         http
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
                 .sessionManagement( session -> // stateless (no sessions, token-based auth)
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
