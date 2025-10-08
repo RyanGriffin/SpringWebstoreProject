@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.data.domain.Sort;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ import java.net.URI;
 public class UserController {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
@@ -37,7 +39,7 @@ public class UserController {
         }
 
         User newUser = userMapper.toEntity(request);
-
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(newUser);
 
         UserDto userDto = userMapper.toDto(newUser);
