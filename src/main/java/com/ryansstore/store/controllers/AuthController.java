@@ -21,7 +21,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest loginRequest) {
         if(authService.loginSuccessful(loginRequest.getEmail(), loginRequest.getPassword()))
             return ResponseEntity.ok().build();
 
