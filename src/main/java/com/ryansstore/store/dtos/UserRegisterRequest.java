@@ -17,6 +17,7 @@ public class UserRegisterRequest {
     @Lowercase(message = "email must be lowercase!")
     private String email;
 
+    @NotBlank(message = "phone number is required!")
     @Size(min = 13, max = 13, message = "must be a full phone number! - i.e. '(555)555-5555'")
     private String phoneNumber;
 
