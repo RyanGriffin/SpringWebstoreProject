@@ -34,8 +34,7 @@ public class UserController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
         if(userRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity.badRequest().body(
-                    Map.of("email", "email is already registered!")
-            );
+                    Map.of("email", "email is already registered!"));
         }
 
         User newUser = userMapper.toEntity(request);
