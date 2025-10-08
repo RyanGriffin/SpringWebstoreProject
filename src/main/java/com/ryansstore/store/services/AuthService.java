@@ -4,9 +4,9 @@ import com.ryansstore.store.entities.User;
 import com.ryansstore.store.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
 
-import java.util.Optional;
-
+@AllArgsConstructor
 @Service
 public class AuthService {
     private UserRepository userRepository;
