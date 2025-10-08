@@ -29,6 +29,11 @@ public class AuthController {
 
         return ResponseEntity.ok().build();
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Void> handleBadCredentialsException() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 }
 
 
