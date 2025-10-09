@@ -1,5 +1,6 @@
 package com.ryansstore.store.services;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import io.jsonwebtoken.JwtException;
@@ -14,17 +15,25 @@ public class JwtService {
 
     public boolean validateToken(String token) {
         try {
-            var claims = Jwts.parser()
-                    .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
-                    .build()
-                    .parseClaimsJws(token)
-                    .getPayload();
+            var claims = getClaims(token);
 
             return claims.getExpiration().after(new Date());
         }
         catch (JwtException e) {
             return false;
         }
+    }
+
+    public String getEmailFromToken(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getPayload();
     }
 
     public String generateToken(String email) {
