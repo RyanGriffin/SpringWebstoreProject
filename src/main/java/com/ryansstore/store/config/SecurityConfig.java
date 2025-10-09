@@ -1,7 +1,6 @@
 package com.ryansstore.store.config;
 
 import com.ryansstore.store.filters.JwtAuthenticationFilter;
-import com.ryansstore.store.services.JwtService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
