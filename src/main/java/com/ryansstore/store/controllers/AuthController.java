@@ -1,5 +1,7 @@
 package com.ryansstore.store.controllers;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,13 @@ public class AuthController {
         String token = jwtService.generateToken(loginRequest.getEmail());
 
         return ResponseEntity.ok(new JwtResponse(token));
+    }
+
+    @PostMapping("/validate")
+    public boolean validate(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+
+        return jwtService.validateToken(token);
     }
 
     @ExceptionHandler(BadCredentialsException.class)

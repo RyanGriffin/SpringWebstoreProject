@@ -1,8 +1,9 @@
 package com.ryansstore.store.services;
 
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Jwts;
 import java.util.Date;
 
@@ -10,6 +11,21 @@ import java.util.Date;
 public class JwtService {
     @Value("${spring.jwt.secret}")
     private String secret;
+
+    public boolean validateToken(String token) {
+        try {
+            var claims = Jwts.parser()
+                    .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                    .build()
+                    .parseClaimsJws(token)
+                    .getPayload();
+
+            return claims.getExpiration().after(new Date());
+        }
+        catch (JwtException e) {
+            return false;
+        }
+    }
 
     public String generateToken(String email) {
         long expiration = 86400; // 24 hours in seconds
