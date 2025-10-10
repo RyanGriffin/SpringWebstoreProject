@@ -1,5 +1,6 @@
 package com.ryansstore.store.services;
 
+import com.ryansstore.store.entities.User;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,10 +14,22 @@ public class JwtService {
     @Value("${spring.jwt.secret}")
     private String secret;
 
+    public String generateToken(User user) {
+        long expiration = 86400; // 24 hours in seconds
+
+        return Jwts.builder()
+                .setSubject(user.getId().toString())
+                .claim("name", user.getName())
+                .claim("email", user.getEmail())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000 * expiration))
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .compact(); // similar to .build() for builder objects
+    }
+
     public boolean validateToken(String token) {
         try {
             var claims = getClaims(token);
-
             return claims.getExpiration().after(new Date());
         }
         catch (JwtException e) {
@@ -24,11 +37,7 @@ public class JwtService {
         }
     }
 
-    public String getEmailFromToken(String token) {
-        return getClaims(token).getSubject();
-    }
-
-    private Claims getClaims(String token) {
+    public Claims getClaims(String token) {
         return Jwts.parser()
                 .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
                 .build()
@@ -36,14 +45,15 @@ public class JwtService {
                 .getPayload();
     }
 
-    public String generateToken(String email) {
-        long expiration = 86400; // 24 hours in seconds
+    public Long getUserIdFromToken(String token) {
+        return Long.valueOf(getClaims(token).getSubject());
+    }
 
-        return Jwts.builder()
-                .setSubject(email)
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * expiration))
-                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
-                .compact(); // similar to .build() for builder objects
+    public String getNameFromToken(String token) {
+        return getClaims(token).get("name").toString();
+    }
+
+    public String getEmailFromToken(String token) {
+        return getClaims(token).get("email").toString();
     }
 }
