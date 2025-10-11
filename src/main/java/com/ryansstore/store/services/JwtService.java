@@ -1,29 +1,26 @@
 package com.ryansstore.store.services;
 
-import com.ryansstore.store.entities.User;
-import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Value;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Jwts;
+import com.ryansstore.store.entities.User;
+import com.ryansstore.store.config.JwtConfig;
+import lombok.AllArgsConstructor;
 import java.util.Date;
 
+@AllArgsConstructor
 @Service
 public class JwtService {
-    @Value("${spring.jwt.secret}")
-    private String secret;
+    private final JwtConfig config;
 
     public String generateAccessToken(User user) {
-        long expiration = 300; // 5 minutes in seconds
-
-        return generateToken(user, expiration);
+        return generateToken(user, config.getAccessTokenExpiration());
     }
 
     public String generateRefreshToken(User user) {
-        long expiration = 604800; // 7 days in seconds
-
-        return generateToken(user, expiration);
+        return generateToken(user, config.getRefreshTokenExpiration());
     }
 
     private String generateToken(User user, long expiration) {
@@ -33,7 +30,7 @@ public class JwtService {
                 .claim("email", user.getEmail())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * expiration))
-                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .signWith(config.getSecretKey())
                 .compact();
     }
 
@@ -49,7 +46,7 @@ public class JwtService {
 
     public Claims getClaims(String token) {
         return Jwts.parser()
-                .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .verifyWith(config.getSecretKey())
                 .build()
                 .parseClaimsJws(token)
                 .getPayload();
