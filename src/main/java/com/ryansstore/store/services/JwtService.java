@@ -3,7 +3,6 @@ package com.ryansstore.store.services;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Jwts;
 import com.ryansstore.store.entities.User;
 import com.ryansstore.store.config.JwtConfig;
@@ -28,6 +27,7 @@ public class JwtService {
                 .setSubject(user.getId().toString())
                 .claim("name", user.getName())
                 .claim("email", user.getEmail())
+                .claim("role", user.getRole())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * expiration))
                 .signWith(config.getSecretKey())
