@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import com.ryansstore.store.entities.User;
+import com.ryansstore.store.entities.Role;
 import com.ryansstore.store.config.JwtConfig;
 import lombok.AllArgsConstructor;
 import java.util.Date;
@@ -62,5 +63,9 @@ public class JwtService {
 
     public String getEmailFromToken(String token) {
         return getClaims(token).get("email").toString();
+    }
+
+    public Role getRoleFromToken(String token) {
+        return Role.valueOf(getClaims(token).get("role").toString());
     }
 }
