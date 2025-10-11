@@ -1,6 +1,7 @@
 package com.ryansstore.store.controllers;
 
 import com.ryansstore.store.entities.User;
+import com.ryansstore.store.entities.Role;
 import com.ryansstore.store.dtos.UserDto;
 import com.ryansstore.store.dtos.UserRegisterRequest;
 import com.ryansstore.store.dtos.UserUpdateRequest;
@@ -39,6 +40,7 @@ public class UserController {
 
         User newUser = userMapper.toEntity(request);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newUser.setRole(Role.USER);
         userRepository.save(newUser);
 
         UserDto userDto = userMapper.toDto(newUser);

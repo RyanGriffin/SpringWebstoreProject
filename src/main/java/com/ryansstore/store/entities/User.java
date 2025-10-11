@@ -32,6 +32,10 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @OneToMany( mappedBy = "user",
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             orphanRemoval = true)
