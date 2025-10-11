@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import com.ryansstore.store.services.JwtService;
 import com.ryansstore.store.dtos.JwtResponse;
 import com.ryansstore.store.dtos.LoginRequest;
@@ -30,7 +32,7 @@ public class AuthController {
     private final UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -39,9 +41,18 @@ public class AuthController {
         );
 
         User user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow();
-        String token = jwtService.generateToken(user);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        String accessToken = jwtService.generateAccessToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
+
+        Cookie cookie = new Cookie("refreshToken", refreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/auth/refresh");
+        cookie.setMaxAge(604800); // 7 days
+        cookie.setSecure(true);
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok(new JwtResponse(accessToken));
     }
 
     @PostMapping("/validate")
