@@ -6,7 +6,6 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import com.ryansstore.store.config.JwtConfig;
 import com.ryansstore.store.entities.User;
-import com.ryansstore.store.entities.Role;
 import lombok.AllArgsConstructor;
 import java.util.Date;
 
