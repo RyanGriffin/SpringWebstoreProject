@@ -7,8 +7,8 @@ import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 
 @Data
-@ConfigurationProperties(prefix = "spring.jwt")
 @Configuration
+@ConfigurationProperties(prefix = "spring.jwt")
 public class JwtConfig {
     private String secret;
     private int accessTokenExpiration;
