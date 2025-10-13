@@ -1,6 +1,7 @@
 create table order_items
 (
-    id          bigint          not null,
+    id          bigint auto_increment
+        primary key,
     order_id    bigint          not null,
     product_id  bigint          not null,
     unit_price  decimal(10, 2)  not null,
