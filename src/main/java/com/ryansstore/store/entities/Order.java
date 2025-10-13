@@ -1,11 +1,17 @@
 package com.ryansstore.store.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -16,7 +22,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private User user;
+    private User customer;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -26,9 +32,11 @@ public class Order {
     private LocalDateTime createdAt;
 
     @Column(name = "total_price")
-    private double totalPrice;
+    private BigDecimal totalPrice;
 
-    @OneToMany( mappedBy = "order")
+    @OneToMany( mappedBy = "order",
+                cascade = CascadeType.PERSIST,
+                fetch = FetchType.EAGER)
     private Set<OrderItem> items = new HashSet<>();
 
     public BigDecimal getTotalPrice() {

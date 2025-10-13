@@ -1,8 +1,15 @@
 package com.ryansstore.store.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.math.BigDecimal;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
 @Table(name = "order_items")
 public class OrderItem {
