@@ -10,7 +10,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.ryansstore.store.entities.Role;
+import com.ryansstore.store.services.Jwt;
 import com.ryansstore.store.services.JwtService;
 import lombok.AllArgsConstructor;
 import java.io.IOException;
@@ -30,17 +30,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String token = authHeader.replace("Bearer ", "");
-        if(!jwtService.validateToken(token)) {
+        Jwt jwt = jwtService.parse(token);
+        if(jwt == null || jwt.isExpired()) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        Role role = jwtService.getRoleFromToken(token);
-        long userId = jwtService.getUserIdFromToken(token);
         var authentication = new UsernamePasswordAuthenticationToken(
-                userId,
+                jwt.getUserId(),
                 null,
-                List.of(new SimpleGrantedAuthority("ROLE_" + role))
+                List.of(new SimpleGrantedAuthority("ROLE_" + jwt.getRole()))
         );
 
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

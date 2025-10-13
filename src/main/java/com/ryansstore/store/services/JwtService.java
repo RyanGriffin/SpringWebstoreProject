@@ -15,33 +15,34 @@ import java.util.Date;
 public class JwtService {
     private final JwtConfig config;
 
-    public String generateAccessToken(User user) {
+    public Jwt generateAccessToken(User user) {
         return generateToken(user, config.getAccessTokenExpiration());
     }
 
-    public String generateRefreshToken(User user) {
+    public Jwt generateRefreshToken(User user) {
         return generateToken(user, config.getRefreshTokenExpiration());
     }
 
-    private String generateToken(User user, long expiration) {
-        return Jwts.builder()
-                .setSubject(user.getId().toString())
-                .claim("name", user.getName())
-                .claim("email", user.getEmail())
-                .claim("role", user.getRole())
+    private Jwt generateToken(User user, long expiration) {
+        Claims claims = Jwts.claims()
+                .subject(user.getId().toString())
+                .add("name", user.getName())
+                .add("email", user.getEmail())
+                .add("role", user.getRole())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * expiration))
-                .signWith(config.getSecretKey())
-                .compact();
+                .build();
+
+        return new Jwt(claims, config.getSecretKey());
     }
 
-    public boolean validateToken(String token) {
+    public Jwt parse(String token) {
         try {
-            var claims = getClaims(token);
-            return claims.getExpiration().after(new Date());
-        }
-        catch (JwtException e) {
-            return false;
+            Claims claims = getClaims(token);
+
+            return new Jwt(claims, config.getSecretKey());
+        } catch (JwtException e) {
+            return null;
         }
     }
 

@@ -1,6 +1,5 @@
 package com.ryansstore.store.controllers;
 
-import com.ryansstore.store.config.JwtConfig;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.BadCredentialsException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import com.ryansstore.store.services.Jwt;
 import com.ryansstore.store.services.JwtService;
+import com.ryansstore.store.config.JwtConfig;
 import com.ryansstore.store.dtos.JwtResponse;
 import com.ryansstore.store.dtos.LoginRequest;
 import com.ryansstore.store.entities.User;
@@ -44,29 +45,29 @@ public class AuthController {
 
         User user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow();
 
-        String accessToken = jwtService.generateAccessToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
+        Jwt accessToken = jwtService.generateAccessToken(user);
+        Jwt refreshToken = jwtService.generateRefreshToken(user);
 
-        Cookie cookie = new Cookie("refreshToken", refreshToken);
+        Cookie cookie = new Cookie("refreshToken", refreshToken.toString());
         cookie.setHttpOnly(true);
         cookie.setPath("/auth/refresh");
         cookie.setMaxAge(jwtConfig.getRefreshTokenExpiration()); // 7 days
         cookie.setSecure(true);
         response.addCookie(cookie);
 
-        return ResponseEntity.ok(new JwtResponse(accessToken));
+        return ResponseEntity.ok(new JwtResponse(accessToken.toString()));
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> refresh(@CookieValue(value = "refreshToken") String refreshToken) {
-        if(!jwtService.validateToken(refreshToken))
+        Jwt refresh = jwtService.parse(refreshToken);
+        if(refresh.isExpired())
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
-        long userId = jwtService.getUserIdFromToken(refreshToken);
-        User user = userRepository.findById(userId).orElseThrow();
-        String accessToken = jwtService.generateAccessToken(user);
+        User user = userRepository.findById(refresh.getUserId()).orElseThrow();
+        Jwt accessToken = jwtService.generateAccessToken(user);
 
-        return ResponseEntity.ok(new JwtResponse(accessToken));
+        return ResponseEntity.ok(new JwtResponse(accessToken.toString()));
     }
 
     @GetMapping("/me")
