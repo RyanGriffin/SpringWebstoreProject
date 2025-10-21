@@ -21,7 +21,8 @@ public class CheckoutService {
 
     public CheckoutResponse checkout(UUID cartId) {
         Cart cart = cartRepository.getCartWithItems(cartId).orElse(null);
-        if (cart == null)
+
+        if(cart == null)
             throw new CartNotFoundException();
         if(cart.getItems().isEmpty())
             throw new EmptyCartException();
