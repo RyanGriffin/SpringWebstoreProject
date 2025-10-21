@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import com.ryansstore.store.entities.Order;
 import com.ryansstore.store.entities.User;
-
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
