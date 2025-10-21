@@ -1,5 +1,6 @@
 package com.ryansstore.store.controllers;
 
+import com.ryansstore.store.services.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +17,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
+    private final OrderService orderService;
     private final AuthService authService;
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
 
     @GetMapping
     public List<OrderDto> getOrders() {
-        User user = authService.getCurrentUser();
-        List<Order> orders = orderRepository.findAllByCustomer(user);
-        return orders.stream().map(orderMapper::toDto).toList();
+        return orderService.getAllOrders();
     }
 }
