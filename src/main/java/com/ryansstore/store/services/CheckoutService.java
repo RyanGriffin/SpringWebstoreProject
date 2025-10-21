@@ -24,7 +24,7 @@ public class CheckoutService {
 
         if(cart == null)
             throw new CartNotFoundException();
-        if(cart.getItems().isEmpty())
+        if(cart.isEmpty())
             throw new EmptyCartException();
 
         Order order = Order.fromCart(cart, authService.getCurrentUser());
