@@ -1,15 +1,13 @@
 package com.ryansstore.store.controllers;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.services.OrderService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import com.ryansstore.store.repositories.OrderRepository;
-import com.ryansstore.store.mappers.OrderMapper;
-import com.ryansstore.store.entities.Order;
-import com.ryansstore.store.entities.User;
 import com.ryansstore.store.dtos.OrderDto;
-import com.ryansstore.store.services.AuthService;
+import com.ryansstore.store.dtos.ErrorDto;
+import com.ryansstore.store.exceptions.UnauthorizedOrderException;
+import com.ryansstore.store.exceptions.OrderNotFoundException;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
@@ -18,12 +16,24 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
     private final OrderService orderService;
-    private final AuthService authService;
-    private final OrderRepository orderRepository;
-    private final OrderMapper orderMapper;
 
     @GetMapping
     public List<OrderDto> getOrders() {
         return orderService.getAllOrders();
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderDto> getOrder(@PathVariable("orderId") Long orderId) {
+        return orderService.getOrder(orderId);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleOrderNotFound() {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDto("order not found!"));
+    }
+
+    @ExceptionHandler(UnauthorizedOrderException.class)
+    public ResponseEntity<ErrorDto> handleUnauthorizedOrder() {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorDto("this order does not belong to current user!"));
     }
 }
