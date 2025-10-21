@@ -3,6 +3,7 @@ package com.ryansstore.store.services;
 import org.springframework.stereotype.Service;
 import com.ryansstore.store.entities.Cart;
 import com.ryansstore.store.entities.Order;
+import com.ryansstore.store.dtos.CheckoutRequest;
 import com.ryansstore.store.dtos.CheckoutResponse;
 import com.ryansstore.store.repositories.CartRepository;
 import com.ryansstore.store.repositories.OrderRepository;
@@ -19,7 +20,8 @@ public class CheckoutService {
     private final CartRepository cartRepository;
     private final OrderRepository orderRepository;
 
-    public CheckoutResponse checkout(UUID cartId) {
+    public CheckoutResponse checkout(CheckoutRequest request) {
+        UUID cartId = request.getCartId();
         Cart cart = cartRepository.getCartWithItems(cartId).orElse(null);
 
         if(cart == null)
@@ -34,6 +36,5 @@ public class CheckoutService {
         cartService.clearCart(cartId);
 
         return new CheckoutResponse(order.getId());
-
     }
 }

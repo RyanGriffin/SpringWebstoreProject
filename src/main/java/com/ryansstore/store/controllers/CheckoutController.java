@@ -11,7 +11,6 @@ import com.ryansstore.store.dtos.CheckoutRequest;
 import com.ryansstore.store.dtos.CheckoutResponse;
 import lombok.AllArgsConstructor;
 import jakarta.validation.Valid;
-import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
@@ -21,10 +20,7 @@ public class CheckoutController {
 
     @PostMapping
     public ResponseEntity<CheckoutResponse> checkout(@Valid @RequestBody CheckoutRequest request) {
-        UUID cartId = request.getCartId();
-
-        CheckoutResponse response = checkoutService.checkout(cartId);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(checkoutService.checkout(request));
     }
 
     @ExceptionHandler(CartNotFoundException.class)
