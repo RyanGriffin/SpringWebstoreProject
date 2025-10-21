@@ -1,7 +1,6 @@
 package com.ryansstore.store.services;
 
 import com.ryansstore.store.entities.OrderItem;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.ryansstore.store.entities.Cart;
 import com.ryansstore.store.entities.Order;
