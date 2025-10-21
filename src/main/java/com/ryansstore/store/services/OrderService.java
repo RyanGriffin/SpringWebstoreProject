@@ -18,7 +18,7 @@ public class OrderService {
 
     public List<OrderDto> getAllOrders() {
         User user = authService.getCurrentUser();
-        List<Order> orders = orderRepository.findAllByCustomer(user);
+        List<Order> orders = orderRepository.getAllByCustomer(user);
 
         return orders.stream().map(orderMapper::toDto).toList();
     }
