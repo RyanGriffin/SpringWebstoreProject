@@ -29,7 +29,7 @@ public class OrderController {
 
     @ExceptionHandler(OrderNotFoundException.class)
     public ResponseEntity<ErrorDto> handleOrderNotFound() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDto("order not found!"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto("order not found!"));
     }
 
     @ExceptionHandler(UnauthorizedOrderException.class)
