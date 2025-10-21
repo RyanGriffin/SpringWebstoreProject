@@ -39,12 +39,17 @@ public class Order {
                 fetch = FetchType.EAGER)
     private Set<OrderItem> items = new HashSet<>();
 
-    public BigDecimal getTotalPrice() {
-        BigDecimal totalPrice = BigDecimal.ZERO;
+    public static Order fromCart(Cart cart, User customer) {
+        Order order = new Order();
+        order.setCustomer(customer);
+        order.setStatus(OrderStatus.PENDING);
+        order.setTotalPrice(cart.getTotalPrice());
 
-        for(OrderItem item : items)
-            totalPrice = totalPrice.add(item.getTotalPrice());
+        cart.getItems().forEach(item -> {
+            OrderItem orderItem = new OrderItem(order, item.getProduct(), item.getQuantity());
+            order.items.add(orderItem);
+        });
 
-        return totalPrice;
+        return order;
     }
 }
