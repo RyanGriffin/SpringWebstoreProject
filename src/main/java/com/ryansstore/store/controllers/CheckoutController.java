@@ -8,7 +8,7 @@ import com.ryansstore.store.exceptions.EmptyCartException;
 import com.ryansstore.store.services.CheckoutService;
 import com.ryansstore.store.dtos.ErrorDto;
 import com.ryansstore.store.dtos.CheckoutRequest;
-import com.ryansstore.store.dtos.CheckoutResponse;
+import com.stripe.exception.StripeException;
 import lombok.AllArgsConstructor;
 import jakarta.validation.Valid;
 
@@ -19,8 +19,15 @@ public class CheckoutController {
     private final CheckoutService checkoutService;
 
     @PostMapping
-    public ResponseEntity<CheckoutResponse> checkout(@Valid @RequestBody CheckoutRequest request) {
-        return ResponseEntity.ok(checkoutService.checkout(request));
+    public ResponseEntity<?> checkout(@Valid @RequestBody CheckoutRequest request) {
+        try{
+            return ResponseEntity.ok(checkoutService.checkout(request));
+        }
+        catch(StripeException ex) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorDto("error while creating new checkout session!"));
+        }
     }
 
     @ExceptionHandler(CartNotFoundException.class)

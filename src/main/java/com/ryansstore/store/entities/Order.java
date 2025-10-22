@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -35,9 +35,9 @@ public class Order {
     private BigDecimal totalPrice;
 
     @OneToMany( mappedBy = "order",
-                cascade = CascadeType.PERSIST,
+                cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
                 fetch = FetchType.EAGER)
-    private Set<OrderItem> items = new HashSet<>();
+    private Set<OrderItem> items = new LinkedHashSet<>();
 
     public static Order fromCart(Cart cart, User customer) {
         Order order = new Order();
