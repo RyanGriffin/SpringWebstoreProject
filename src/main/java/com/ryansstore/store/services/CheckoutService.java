@@ -70,7 +70,6 @@ public class CheckoutService {
         // temporary exception handling: including 'throws StripeException' to method signature...
         // I'll implement better error handling later
         Session session = Session.create(builder.build());
-        // session.getUrl()
 
         cartService.clearCart(cartId);
 
