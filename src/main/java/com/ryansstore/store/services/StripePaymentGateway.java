@@ -1,5 +1,6 @@
 package com.ryansstore.store.services;
 
+import com.ryansstore.store.entities.OrderItem;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import com.stripe.model.checkout.Session;
@@ -22,24 +23,7 @@ public class StripePaymentGateway implements PaymentGateway {
                     .setSuccessUrl(websiteUrl + "/checkout-success?order_id=" + order.getId())
                     .setCancelUrl(websiteUrl + "/checkout-cancel");
 
-            order.getItems().forEach(item -> {
-                var lineItem = SessionCreateParams.LineItem.builder()
-                        .setQuantity(Long.valueOf(item.getQuantity()))
-                        .setPriceData(
-                                SessionCreateParams.LineItem.PriceData.builder()
-                                        .setCurrency("usd")
-                                        .setUnitAmountDecimal(item.getUnitPrice().multiply(BigDecimal.valueOf(100))) // price must be in cents
-                                        .setProductData(
-                                                SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                        .setName(item.getProduct().getName())
-                                                        .build()
-                                        )
-                                        .build()
-                        )
-                        .build();
-
-                builder.addLineItem(lineItem);
-            });
+            order.getItems().forEach(item -> builder.addLineItem(createLineItem(item)));
 
             Session session = Session.create(builder.build());
 
@@ -51,5 +35,26 @@ public class StripePaymentGateway implements PaymentGateway {
             System.out.println(ex.getMessage()); // for now, I will just print this exception message on console...
             throw new PaymentException();
         }
+    }
+
+    private SessionCreateParams.LineItem createLineItem(OrderItem item) {
+        return SessionCreateParams.LineItem.builder()
+                .setQuantity(Long.valueOf(item.getQuantity()))
+                .setPriceData(createPriceData(item))
+                .build();
+    }
+
+    private SessionCreateParams.LineItem.PriceData createPriceData(OrderItem item) {
+        return SessionCreateParams.LineItem.PriceData.builder()
+                .setCurrency("usd")
+                .setUnitAmountDecimal(item.getUnitPrice().multiply(BigDecimal.valueOf(100))) // price must be in cents!
+                .setProductData(createProductData(item))
+                .build();
+    }
+
+    private SessionCreateParams.LineItem.PriceData.ProductData createProductData(OrderItem item) {
+        return SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                .setName(item.getProduct().getName())
+                .build();
     }
 }
