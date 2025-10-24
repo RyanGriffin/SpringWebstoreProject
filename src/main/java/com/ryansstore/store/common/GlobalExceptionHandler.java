@@ -1,11 +1,11 @@
-package com.ryansstore.store.controllers;
+package com.ryansstore.store.common;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import com.ryansstore.store.dtos.ErrorDto;
+
 import java.util.HashMap;
 import java.util.Map;
 

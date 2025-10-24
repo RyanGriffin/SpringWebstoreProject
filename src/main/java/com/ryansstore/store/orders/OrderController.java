@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.orders.dtos.OrderDto;
-import com.ryansstore.store.dtos.ErrorDto;
+import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import java.util.List;
 

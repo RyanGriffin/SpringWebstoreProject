@@ -1,4 +1,4 @@
-package com.ryansstore.store.controllers;
+package com.ryansstore.store.common;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

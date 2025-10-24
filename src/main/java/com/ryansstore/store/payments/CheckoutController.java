@@ -3,7 +3,7 @@ package com.ryansstore.store.payments;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import com.ryansstore.store.dtos.ErrorDto;
+import com.ryansstore.store.common.ErrorDto;
 import com.ryansstore.store.carts.CartNotFoundException;
 import com.ryansstore.store.carts.EmptyCartException;
 import lombok.RequiredArgsConstructor;
