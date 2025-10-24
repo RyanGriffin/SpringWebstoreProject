@@ -1,4 +1,4 @@
-package com.ryansstore.store.entities;
+package com.ryansstore.store.payments;
 
 public enum PaymentStatus {
     PENDING,
