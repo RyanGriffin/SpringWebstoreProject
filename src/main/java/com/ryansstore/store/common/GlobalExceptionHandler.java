@@ -1,5 +1,6 @@
 package com.ryansstore.store.common;
 
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
 
-        exception.getBindingResult().getFieldErrors().forEach((error) -> {
+        for(FieldError error : exception.getBindingResult().getFieldErrors())
             errors.put(error.getField(), error.getDefaultMessage());
-        });
 
         return ResponseEntity.badRequest().body(errors);
     }
