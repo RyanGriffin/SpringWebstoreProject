@@ -1,6 +1,5 @@
-package com.ryansstore.store.repositories;
+package com.ryansstore.store.users;
 
-import com.ryansstore.store.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

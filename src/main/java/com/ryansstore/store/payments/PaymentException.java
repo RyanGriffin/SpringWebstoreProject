@@ -1,4 +1,4 @@
-package com.ryansstore.store.exceptions;
+package com.ryansstore.store.payments;
 
 import lombok.NoArgsConstructor;
 

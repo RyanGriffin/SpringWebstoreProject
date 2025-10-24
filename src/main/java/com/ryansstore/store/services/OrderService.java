@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import com.ryansstore.store.exceptions.OrderNotFoundException;
 import com.ryansstore.store.exceptions.UnauthorizedOrderException;
 import org.springframework.http.ResponseEntity;
-import com.ryansstore.store.entities.User;
+import com.ryansstore.store.users.User;
 import com.ryansstore.store.entities.Order;
 import com.ryansstore.store.dtos.OrderDto;
 import com.ryansstore.store.repositories.OrderRepository;

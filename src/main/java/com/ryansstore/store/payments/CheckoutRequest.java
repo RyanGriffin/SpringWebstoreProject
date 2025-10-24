@@ -1,4 +1,4 @@
-package com.ryansstore.store.dtos;
+package com.ryansstore.store.payments;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

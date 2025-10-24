@@ -1,4 +1,4 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.payments;
 
 import com.ryansstore.store.entities.OrderItem;
 import com.ryansstore.store.entities.PaymentStatus;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.exception.StripeException;
-import com.ryansstore.store.exceptions.PaymentException;
 import com.ryansstore.store.entities.Order;
 import java.math.BigDecimal;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.ryansstore.store.entities;
+package com.ryansstore.store.users;
 
 import jakarta.persistence.*;
 import lombok.*;

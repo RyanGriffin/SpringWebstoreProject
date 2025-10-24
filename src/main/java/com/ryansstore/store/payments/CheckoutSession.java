@@ -1,4 +1,4 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.payments;
 
 import lombok.Getter;
 import lombok.AllArgsConstructor;

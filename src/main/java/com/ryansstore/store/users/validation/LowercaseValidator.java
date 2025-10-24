@@ -1,4 +1,4 @@
-package com.ryansstore.store.validation;
+package com.ryansstore.store.users.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

@@ -1,4 +1,4 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.payments;
 
 import com.ryansstore.store.entities.Order;
 import java.util.Optional;

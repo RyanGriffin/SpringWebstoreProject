@@ -1,4 +1,4 @@
-package com.ryansstore.store.dtos;
+package com.ryansstore.store.payments;
 
 import lombok.Data;
 import lombok.AllArgsConstructor;

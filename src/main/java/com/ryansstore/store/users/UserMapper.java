@@ -1,9 +1,5 @@
-package com.ryansstore.store.mappers;
+package com.ryansstore.store.users;
 
-import com.ryansstore.store.entities.User;
-import com.ryansstore.store.dtos.UserDto;
-import com.ryansstore.store.dtos.UserUpdateRequest;
-import com.ryansstore.store.dtos.UserRegisterRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 

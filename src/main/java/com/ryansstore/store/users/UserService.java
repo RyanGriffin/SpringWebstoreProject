@@ -1,11 +1,10 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.users;
 
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import com.ryansstore.store.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import java.util.Collections;
 

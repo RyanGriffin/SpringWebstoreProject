@@ -3,7 +3,7 @@ package com.ryansstore.store.services;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;
 import javax.crypto.SecretKey;
-import com.ryansstore.store.entities.Role;
+import com.ryansstore.store.users.Role;
 import lombok.AllArgsConstructor;
 import java.util.Date;
 

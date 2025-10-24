@@ -1,4 +1,4 @@
-package com.ryansstore.store.validation;
+package com.ryansstore.store.users.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

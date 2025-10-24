@@ -1,6 +1,5 @@
-package com.ryansstore.store.repositories;
+package com.ryansstore.store.users;
 
-import com.ryansstore.store.entities.Profile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.EntityGraph;

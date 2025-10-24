@@ -1,4 +1,4 @@
-package com.ryansstore.store.config;
+package com.ryansstore.store.payments;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;

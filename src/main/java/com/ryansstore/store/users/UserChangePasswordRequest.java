@@ -1,4 +1,4 @@
-package com.ryansstore.store.dtos;
+package com.ryansstore.store.users;
 
 import lombok.Data;
 

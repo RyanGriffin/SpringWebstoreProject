@@ -1,6 +1,5 @@
-package com.ryansstore.store.repositories;
+package com.ryansstore.store.users;
 
-import com.ryansstore.store.entities.Address;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AddressRepository extends CrudRepository<Address, Long> {

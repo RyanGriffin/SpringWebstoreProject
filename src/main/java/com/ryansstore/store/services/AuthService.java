@@ -1,7 +1,7 @@
 package com.ryansstore.store.services;
 
-import com.ryansstore.store.entities.User;
-import com.ryansstore.store.repositories.UserRepository;
+import com.ryansstore.store.users.User;
+import com.ryansstore.store.users.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,5 +1,6 @@
-package com.ryansstore.store.entities;
+package com.ryansstore.store.users;
 
+import com.ryansstore.store.entities.Product;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
