@@ -1,15 +1,13 @@
-package com.ryansstore.store.controllers;
+package com.ryansstore.store.carts;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.ryansstore.store.services.CartService;
-import com.ryansstore.store.dtos.CartDto;
-import com.ryansstore.store.dtos.CartItemDto;
-import com.ryansstore.store.dtos.CartItemQuantityRequest;
-import com.ryansstore.store.dtos.CartAddItemRequest;
-import com.ryansstore.store.exceptions.CartNotFoundException;
+import com.ryansstore.store.carts.dtos.CartDto;
+import com.ryansstore.store.carts.dtos.CartItemDto;
+import com.ryansstore.store.carts.dtos.CartItemQuantityRequest;
+import com.ryansstore.store.carts.dtos.CartAddItemRequest;
 import com.ryansstore.store.products.ProductNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

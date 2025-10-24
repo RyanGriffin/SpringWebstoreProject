@@ -1,16 +1,11 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.carts;
 
 import org.springframework.stereotype.Service;
-import com.ryansstore.store.entities.Cart;
-import com.ryansstore.store.entities.CartItem;
 import com.ryansstore.store.products.Product;
-import com.ryansstore.store.repositories.CartRepository;
 import com.ryansstore.store.products.ProductRepository;
-import com.ryansstore.store.dtos.CartDto;
-import com.ryansstore.store.dtos.CartItemDto;
-import com.ryansstore.store.exceptions.CartNotFoundException;
+import com.ryansstore.store.carts.dtos.CartDto;
+import com.ryansstore.store.carts.dtos.CartItemDto;
 import com.ryansstore.store.products.ProductNotFoundException;
-import com.ryansstore.store.mappers.CartMapper;
 import lombok.AllArgsConstructor;
 import java.util.UUID;
 

@@ -1,5 +1,6 @@
 package com.ryansstore.store.entities;
 
+import com.ryansstore.store.carts.Cart;
 import com.ryansstore.store.users.User;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.ryansstore.store.dtos;
+package com.ryansstore.store.carts.dtos;
 
 import lombok.Data;
 import java.util.UUID;

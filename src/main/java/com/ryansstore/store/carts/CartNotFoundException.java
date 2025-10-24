@@ -1,4 +1,4 @@
-package com.ryansstore.store.exceptions;
+package com.ryansstore.store.carts;
 
 public class CartNotFoundException extends RuntimeException {
 }

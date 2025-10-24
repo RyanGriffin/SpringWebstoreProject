@@ -3,8 +3,6 @@ package com.ryansstore.store.products;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.ryansstore.store.entities.Category;
-import com.ryansstore.store.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
