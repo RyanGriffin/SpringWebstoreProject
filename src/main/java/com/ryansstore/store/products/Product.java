@@ -1,5 +1,6 @@
-package com.ryansstore.store.entities;
+package com.ryansstore.store.products;
 
+import com.ryansstore.store.entities.Category;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;

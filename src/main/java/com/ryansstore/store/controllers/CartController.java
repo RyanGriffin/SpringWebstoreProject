@@ -10,7 +10,7 @@ import com.ryansstore.store.dtos.CartItemDto;
 import com.ryansstore.store.dtos.CartItemQuantityRequest;
 import com.ryansstore.store.dtos.CartAddItemRequest;
 import com.ryansstore.store.exceptions.CartNotFoundException;
-import com.ryansstore.store.exceptions.ProductNotFoundException;
+import com.ryansstore.store.products.ProductNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;

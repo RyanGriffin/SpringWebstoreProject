@@ -1,13 +1,9 @@
-package com.ryansstore.store.controllers;
+package com.ryansstore.store.products;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.ryansstore.store.entities.Product;
 import com.ryansstore.store.entities.Category;
-import com.ryansstore.store.dtos.ProductDto;
-import com.ryansstore.store.mappers.ProductMapper;
-import com.ryansstore.store.repositories.ProductRepository;
 import com.ryansstore.store.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;

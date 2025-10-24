@@ -1,4 +1,4 @@
-package com.ryansstore.store.exceptions;
+package com.ryansstore.store.products;
 
 public class ProductNotFoundException extends RuntimeException {
 }
