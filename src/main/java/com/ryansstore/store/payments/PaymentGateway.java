@@ -1,6 +1,6 @@
 package com.ryansstore.store.payments;
 
-import com.ryansstore.store.entities.Order;
+import com.ryansstore.store.orders.Order;
 import java.util.Optional;
 
 public interface PaymentGateway {

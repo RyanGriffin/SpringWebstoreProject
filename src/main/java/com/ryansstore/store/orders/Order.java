@@ -1,4 +1,4 @@
-package com.ryansstore.store.entities;
+package com.ryansstore.store.orders;
 
 import com.ryansstore.store.carts.Cart;
 import com.ryansstore.store.users.User;

@@ -1,4 +1,4 @@
-package com.ryansstore.store.exceptions;
+package com.ryansstore.store.orders;
 
 public class OrderNotFoundException extends RuntimeException {
 }

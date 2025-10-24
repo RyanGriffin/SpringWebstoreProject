@@ -1,6 +1,5 @@
 package com.ryansstore.store.payments;
 
-import com.ryansstore.store.entities.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -1,8 +1,7 @@
-package com.ryansstore.store.mappers;
+package com.ryansstore.store.orders;
 
 import org.mapstruct.Mapper;
-import com.ryansstore.store.entities.Order;
-import com.ryansstore.store.dtos.OrderDto;
+import com.ryansstore.store.orders.dtos.OrderDto;
 
 @Mapper(componentModel = "spring")
 public interface OrderMapper {

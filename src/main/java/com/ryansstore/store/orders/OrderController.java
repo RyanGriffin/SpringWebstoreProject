@@ -1,13 +1,10 @@
-package com.ryansstore.store.controllers;
+package com.ryansstore.store.orders;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import com.ryansstore.store.services.OrderService;
-import com.ryansstore.store.dtos.OrderDto;
+import com.ryansstore.store.orders.dtos.OrderDto;
 import com.ryansstore.store.dtos.ErrorDto;
-import com.ryansstore.store.exceptions.UnauthorizedOrderException;
-import com.ryansstore.store.exceptions.OrderNotFoundException;
 import lombok.AllArgsConstructor;
 import java.util.List;
 

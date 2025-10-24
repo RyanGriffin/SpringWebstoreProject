@@ -1,14 +1,14 @@
 package com.ryansstore.store.payments;
 
-import com.ryansstore.store.entities.OrderStatus;
+import com.ryansstore.store.orders.OrderStatus;
 import com.ryansstore.store.authentication.AuthService;
 import com.ryansstore.store.carts.CartService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ryansstore.store.carts.Cart;
-import com.ryansstore.store.entities.Order;
+import com.ryansstore.store.orders.Order;
 import com.ryansstore.store.carts.CartRepository;
-import com.ryansstore.store.repositories.OrderRepository;
+import com.ryansstore.store.orders.OrderRepository;
 import com.ryansstore.store.carts.CartNotFoundException;
 import com.ryansstore.store.carts.EmptyCartException;
 import lombok.RequiredArgsConstructor;

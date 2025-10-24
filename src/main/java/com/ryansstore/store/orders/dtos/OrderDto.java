@@ -1,4 +1,4 @@
-package com.ryansstore.store.dtos;
+package com.ryansstore.store.orders.dtos;
 
 import lombok.Data;
 import java.math.BigDecimal;

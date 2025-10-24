@@ -1,7 +1,6 @@
 package com.ryansstore.store.payments;
 
-import com.ryansstore.store.entities.OrderItem;
-import com.ryansstore.store.entities.PaymentStatus;
+import com.ryansstore.store.orders.OrderItem;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
 import com.stripe.model.PaymentIntent;
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.exception.StripeException;
-import com.ryansstore.store.entities.Order;
+import com.ryansstore.store.orders.Order;
 import java.math.BigDecimal;
 import java.util.Optional;
 

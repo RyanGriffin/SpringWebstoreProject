@@ -1,15 +1,10 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.orders;
 
 import com.ryansstore.store.authentication.AuthService;
 import org.springframework.stereotype.Service;
-import com.ryansstore.store.exceptions.OrderNotFoundException;
-import com.ryansstore.store.exceptions.UnauthorizedOrderException;
 import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.users.User;
-import com.ryansstore.store.entities.Order;
-import com.ryansstore.store.dtos.OrderDto;
-import com.ryansstore.store.repositories.OrderRepository;
-import com.ryansstore.store.mappers.OrderMapper;
+import com.ryansstore.store.orders.dtos.OrderDto;
 import lombok.AllArgsConstructor;
 import java.util.List;
 

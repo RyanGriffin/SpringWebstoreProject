@@ -1,4 +1,4 @@
-package com.ryansstore.store.entities;
+package com.ryansstore.store.orders;
 
 import com.ryansstore.store.products.Product;
 import jakarta.persistence.*;
