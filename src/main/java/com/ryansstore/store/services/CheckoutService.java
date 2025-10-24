@@ -1,5 +1,6 @@
 package com.ryansstore.store.services;
 
+import com.ryansstore.store.entities.OrderStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ryansstore.store.entities.Cart;
@@ -48,5 +49,20 @@ public class CheckoutService {
             orderRepository.delete(order); // delete because client could attempt multiple times & create order with no meaning in our application
             throw ex;
         }
+    }
+
+    public void handleWebhookEvent(WebhookRequest request) {
+        paymentGateway
+                .parseWebhookRequest(request)
+                .ifPresent(paymentResult -> {
+                    Order order = orderRepository.findById(paymentResult.getOrderId()).orElseThrow();
+                    switch (paymentResult.getStatus()) {
+                        case PAID -> order.setStatus(OrderStatus.PAID);
+                        case PENDING -> order.setStatus(OrderStatus.PENDING);
+                        case CANCELED -> order.setStatus(OrderStatus.CANCELED);
+                        case FAILED ->  order.setStatus(OrderStatus.FAILED);
+                    }
+                    orderRepository.save(order);
+                });
     }
 }
