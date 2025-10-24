@@ -1,4 +1,4 @@
-package com.ryansstore.store.dtos;
+package com.ryansstore.store.authentication;
 
 import lombok.Data;
 import jakarta.validation.constraints.Email;

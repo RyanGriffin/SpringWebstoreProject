@@ -1,10 +1,9 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.authentication;
 
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import com.ryansstore.store.config.JwtConfig;
 import com.ryansstore.store.users.User;
 import lombok.AllArgsConstructor;
 import java.util.Date;

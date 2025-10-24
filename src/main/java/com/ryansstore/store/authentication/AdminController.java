@@ -1,4 +1,4 @@
-package com.ryansstore.store.controllers;
+package com.ryansstore.store.authentication;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.authentication;
 
 import com.ryansstore.store.users.User;
 import com.ryansstore.store.users.UserRepository;

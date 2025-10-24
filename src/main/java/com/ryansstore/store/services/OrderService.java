@@ -1,5 +1,6 @@
 package com.ryansstore.store.services;
 
+import com.ryansstore.store.authentication.AuthService;
 import org.springframework.stereotype.Service;
 import com.ryansstore.store.exceptions.OrderNotFoundException;
 import com.ryansstore.store.exceptions.UnauthorizedOrderException;

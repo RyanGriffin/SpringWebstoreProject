@@ -1,4 +1,4 @@
-package com.ryansstore.store.services;
+package com.ryansstore.store.authentication;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;

@@ -1,4 +1,4 @@
-package com.ryansstore.store.controllers;
+package com.ryansstore.store.authentication;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,11 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.BadCredentialsException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import com.ryansstore.store.services.Jwt;
-import com.ryansstore.store.services.JwtService;
-import com.ryansstore.store.config.JwtConfig;
-import com.ryansstore.store.dtos.JwtResponse;
-import com.ryansstore.store.dtos.LoginRequest;
 import com.ryansstore.store.users.User;
 import com.ryansstore.store.users.UserRepository;
 import com.ryansstore.store.users.UserDto;

@@ -1,7 +1,7 @@
 package com.ryansstore.store.payments;
 
 import com.ryansstore.store.entities.OrderStatus;
-import com.ryansstore.store.services.AuthService;
+import com.ryansstore.store.authentication.AuthService;
 import com.ryansstore.store.services.CartService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

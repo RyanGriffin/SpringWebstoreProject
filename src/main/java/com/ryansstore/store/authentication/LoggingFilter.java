@@ -1,4 +1,4 @@
-package com.ryansstore.store.filters;
+package com.ryansstore.store.authentication;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
