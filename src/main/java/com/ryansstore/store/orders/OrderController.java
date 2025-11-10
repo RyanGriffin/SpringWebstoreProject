@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.orders.dtos.OrderDto;
 import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 
 @AllArgsConstructor
+@Tag(name = "Orders")
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
