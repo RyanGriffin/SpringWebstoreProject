@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import java.util.Map;
 
 @RequiredArgsConstructor
+@Tag(name = "Checkout")
 @RestController
 @RequestMapping("/checkout")
 public class CheckoutController {
