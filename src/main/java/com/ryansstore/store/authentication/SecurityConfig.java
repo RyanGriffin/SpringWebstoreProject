@@ -55,7 +55,7 @@ public class SecurityConfig {
                 .sessionManagement( session -> // stateless (no sessions, token-based auth)
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth // Authorize auth
                         .requestMatchers("/carts/**").permitAll()
                         .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
