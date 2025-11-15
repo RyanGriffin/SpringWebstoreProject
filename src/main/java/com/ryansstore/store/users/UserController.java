@@ -43,8 +43,8 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getAllUsers(@RequestParam(name = "sort", defaultValue = "", required = false) String sort) {
-        if(!Set.of("name", "email").contains(sort)) // if parameter isn't valid...
-            sort = "name"; // ...set to default value (name in this case)
+        if(!Set.of("name", "email").contains(sort))
+            sort = "name";
 
         return userRepository.findAll(Sort.by(sort))
                 .stream()
@@ -64,7 +64,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") Long id, @RequestBody UserUpdateRequest request) {
         User user = userRepository.findById(id).orElse(null);
-        if(user == null) // return 404 if user doesn't exist
+        if(user == null)
             return ResponseEntity.notFound().build();
 
         userMapper.updateEntity(request, user);
@@ -76,7 +76,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable(name = "id") Long id) {
         User user = userRepository.findById(id).orElse(null);
-        if(user == null) // return 404 if user doesn't exist
+        if(user == null)
             return ResponseEntity.notFound().build();
 
         userRepository.delete(user);
@@ -87,7 +87,7 @@ public class UserController {
     @PostMapping("/{id}/change-password")
     public ResponseEntity<Void> changePassword(@PathVariable(name = "id") Long id, @RequestBody UserChangePasswordRequest request) {
         User user = userRepository.findById(id).orElse(null);
-        if(user == null) // return 404 if user doesn't exist
+        if(user == null)
             return ResponseEntity.notFound().build();
         if(!user.getPassword().equals(request.getOldPassword())) // return UNAUTHORIZED if passwords don't match
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
