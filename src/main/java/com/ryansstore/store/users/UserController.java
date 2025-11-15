@@ -89,7 +89,7 @@ public class UserController {
         User user = userRepository.findById(id).orElse(null);
         if(user == null)
             return ResponseEntity.notFound().build();
-        if(!user.getPassword().equals(request.getOldPassword())) // return UNAUTHORIZED if passwords don't match
+        if(!user.getPassword().equals(request.getOldPassword()))
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
         user.setPassword(request.getNewPassword());
