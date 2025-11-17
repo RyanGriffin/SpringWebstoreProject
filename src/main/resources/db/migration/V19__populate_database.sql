@@ -220,7 +220,6 @@ INSERT INTO cart_items (cart_id, product_id, quantity) VALUES
 
         (uuid_to_bin('dddddddd-dddd-dddd-dddd-dddddddddddd'), 2, 1),
 
-        (uuid_to_bin('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee'), 8, 1),
         (uuid_to_bin('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee'), 7, 1),
         (uuid_to_bin('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee'), 8, 1),
         (uuid_to_bin('eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee'), 20, 1),
