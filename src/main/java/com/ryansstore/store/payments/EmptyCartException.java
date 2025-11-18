@@ -1,4 +1,4 @@
-package com.ryansstore.store.carts;
+package com.ryansstore.store.payments;
 
 public class EmptyCartException extends RuntimeException {
 }

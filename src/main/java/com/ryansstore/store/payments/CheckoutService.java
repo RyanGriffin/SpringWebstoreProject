@@ -10,7 +10,6 @@ import com.ryansstore.store.orders.Order;
 import com.ryansstore.store.carts.CartRepository;
 import com.ryansstore.store.orders.OrderRepository;
 import com.ryansstore.store.carts.CartNotFoundException;
-import com.ryansstore.store.carts.EmptyCartException;
 import lombok.RequiredArgsConstructor;
 import java.util.UUID;
 
