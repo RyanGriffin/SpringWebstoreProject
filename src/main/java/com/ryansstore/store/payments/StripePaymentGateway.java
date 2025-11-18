@@ -30,7 +30,7 @@ public class StripePaymentGateway implements PaymentGateway {
                     .setMode(SessionCreateParams.Mode.PAYMENT)
                     .setSuccessUrl(websiteUrl + "/checkout-success?order_id=" + order.getId())
                     .setCancelUrl(websiteUrl + "/checkout-cancel")
-                    .putMetadata("order_id", order.getId().toString());
+                    .setPaymentIntentData(createPaymentIntent(order));
 
             order.getItems().forEach(item -> builder.addLineItem(createLineItem(item)));
 
@@ -66,6 +66,12 @@ public class StripePaymentGateway implements PaymentGateway {
         catch (SignatureVerificationException e) {
             throw new PaymentException("invalid signature");
         }
+    }
+
+    private static SessionCreateParams.PaymentIntentData createPaymentIntent(Order order) {
+        return SessionCreateParams.PaymentIntentData.builder()
+                .putMetadata("order_id", order.getId().toString())
+                .build();
     }
 
     private Long extractOrderId(Event event) {
