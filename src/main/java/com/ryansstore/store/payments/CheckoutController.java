@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.common.ErrorDto;
-import com.ryansstore.store.carts.CartNotFoundException;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -27,11 +26,6 @@ public class CheckoutController {
         checkoutService.handleWebhookEvent(new WebhookRequest(headers, payload));
     }
 
-    @ExceptionHandler(CartNotFoundException.class)
-    public ResponseEntity<ErrorDto> handleCartNotFound() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDto("cart not found!"));
-    }
-
     @ExceptionHandler(EmptyCartException.class)
     public ResponseEntity<ErrorDto> handleEmptyCartFound() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDto("cart is empty!"));
@@ -39,8 +33,6 @@ public class CheckoutController {
 
     @ExceptionHandler(PaymentException.class)
     public ResponseEntity<ErrorDto> handlePaymentException() {
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ErrorDto("error while creating new checkout session!"));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDto("error while creating new checkout session!"));
     }
 }
