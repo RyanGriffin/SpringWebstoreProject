@@ -28,7 +28,6 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, UriComponentsBuilder uriBuilder) {
-        System.out.println("createProduct");
         return productService.createProduct(productDto, uriBuilder);
     }
 
