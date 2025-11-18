@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 public class UserSecurityRules implements SecurityRules {
     @Override
     public void configure(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers(HttpMethod.POST, "/users").permitAll(); // anonymous users can register
+        registry.requestMatchers(HttpMethod.POST, "/users").permitAll() // anonymous users can register
+                .requestMatchers(HttpMethod.GET, "/users**").hasRole(Role.ADMIN.name()); // only admins can view user list
     }
 }
