@@ -9,8 +9,8 @@ import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 
-@AllArgsConstructor
 @Tag(name = "Orders")
+@AllArgsConstructor
 @RestController
 @RequestMapping("/orders")
 public class OrderController {

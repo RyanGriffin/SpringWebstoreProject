@@ -14,8 +14,8 @@ import java.util.Map;
 import java.util.Set;
 import java.net.URI;
 
-@AllArgsConstructor
 @Tag(name = "Users")
+@AllArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController {

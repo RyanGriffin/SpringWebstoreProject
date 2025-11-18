@@ -13,8 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.UUID;
 import java.net.URI;
 
-@AllArgsConstructor
 @Tag(name = "Carts")
+@AllArgsConstructor
 @RestController
 @RequestMapping("/carts")
 public class CartController {

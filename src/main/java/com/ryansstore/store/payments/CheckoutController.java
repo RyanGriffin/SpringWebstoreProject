@@ -9,8 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @Tag(name = "Checkout")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/checkout")
 public class CheckoutController {
