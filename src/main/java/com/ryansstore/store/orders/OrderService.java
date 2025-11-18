@@ -1,11 +1,11 @@
 package com.ryansstore.store.orders;
 
-import com.ryansstore.store.authentication.AuthService;
-import com.ryansstore.store.users.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
-import com.ryansstore.store.users.User;
 import com.ryansstore.store.orders.dtos.OrderDto;
+import com.ryansstore.store.users.User;
+import com.ryansstore.store.users.Role;
+import com.ryansstore.store.authentication.AuthService;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
@@ -18,9 +18,11 @@ public class OrderService {
 
     public List<OrderDto> getAllOrders() {
         User user = authService.getCurrentUser();
-        List<Order> orders = orderRepository.getAllByCustomer(user);
 
-        return orders.stream().map(orderMapper::toDto).toList();
+        if(user.getRole().equals(Role.ADMIN))
+            return orderRepository.findAll().stream().map(orderMapper::toDto).toList();
+
+        return orderRepository.getAllByCustomer(user).stream().map(orderMapper::toDto).toList();
     }
 
     public ResponseEntity<OrderDto> getOrder(Long orderId) {
