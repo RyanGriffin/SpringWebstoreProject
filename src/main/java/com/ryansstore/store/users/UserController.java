@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getAllUsers(@RequestParam(name = "sort", defaultValue = "", required = false) String sort) {
-        if(!Set.of("name", "email").contains(sort))
+        if(!Set.of("id", "name", "email").contains(sort))
             sort = "name";
 
         return userRepository.findAll(Sort.by(sort))
