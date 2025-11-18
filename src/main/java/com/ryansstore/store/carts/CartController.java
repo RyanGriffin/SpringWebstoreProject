@@ -1,20 +1,19 @@
 package com.ryansstore.store.carts;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponentsBuilder;
 import com.ryansstore.store.carts.dtos.CartDto;
 import com.ryansstore.store.carts.dtos.CartItemDto;
 import com.ryansstore.store.carts.dtos.CartItemQuantityRequest;
 import com.ryansstore.store.carts.dtos.CartAddItemRequest;
-import com.ryansstore.store.products.ProductNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.UUID;
 import java.net.URI;
 import java.util.Map;
-import java.util.UUID;
 
 @AllArgsConstructor
 @Tag(name = "Carts")
@@ -68,10 +67,5 @@ public class CartController {
     @ExceptionHandler(CartNotFoundException.class)
     public ResponseEntity<Map<String,String>> handleCartNotFound() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "cart not found!"));
-    }
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<Map<String,String>> handleProductNotFound() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "product not found!"));
     }
 }
