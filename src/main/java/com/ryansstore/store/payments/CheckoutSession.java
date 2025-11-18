@@ -6,5 +6,6 @@ import lombok.AllArgsConstructor;
 @Getter
 @AllArgsConstructor
 public class CheckoutSession {
+    private String sessionId;
     private String checkoutUrl;
 }

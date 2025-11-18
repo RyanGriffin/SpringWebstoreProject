@@ -42,7 +42,7 @@ public class CheckoutService {
 
             cartService.clearCart(cartId);
 
-            return new CheckoutResponse(order.getId(), session.getCheckoutUrl());
+            return new CheckoutResponse(order.getId(), session.getSessionId(), session.getCheckoutUrl());
         }
         catch(PaymentException ex) {
             orderRepository.delete(order); // delete because client could attempt multiple times & create order with no meaning in our application

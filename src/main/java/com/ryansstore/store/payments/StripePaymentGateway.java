@@ -36,7 +36,7 @@ public class StripePaymentGateway implements PaymentGateway {
 
             Session session = Session.create(builder.build());
 
-            return new CheckoutSession(session.getId());
+            return new CheckoutSession(session.getId(), session.getUrl());
         }
         catch(StripeException ex) {
             // in an actual prod environment, we would log this exception inside a logging service (i.e. Sentry)
