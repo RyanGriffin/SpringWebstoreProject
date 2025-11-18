@@ -1,6 +1,7 @@
 package com.ryansstore.store.orders;
 
 import com.ryansstore.store.authentication.AuthService;
+import com.ryansstore.store.users.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.users.User;
@@ -26,7 +27,7 @@ public class OrderService {
         Order order = orderRepository.getOrderWithItems(orderId).orElseThrow(OrderNotFoundException::new);
 
         User user = authService.getCurrentUser();
-        if(!order.isPlacedBy(user))
+        if(!order.isPlacedBy(user) && user.getRole() != Role.ADMIN)
             throw new UnauthorizedOrderException(); // could use Spring Security's AccessDeniedException here...
 
         return ResponseEntity.ok(orderMapper.toDto(order));

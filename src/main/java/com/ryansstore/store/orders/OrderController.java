@@ -33,6 +33,6 @@ public class OrderController {
 
     @ExceptionHandler(UnauthorizedOrderException.class)
     public ResponseEntity<ErrorDto> handleUnauthorizedOrder() {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorDto("this order does not belong to current user!"));
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorDto("you can't view this order! You aren't an admin and this isn't your order!"));
     }
 }
