@@ -30,8 +30,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<Map<String,String>> handleProductNotFound() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "product not found!"));
+    public ResponseEntity<ErrorDto> handleProductNotFound() {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto("product not found!"));
     }
 
     @ExceptionHandler(CartNotFoundException.class)

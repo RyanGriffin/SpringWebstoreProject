@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
-import java.util.Map;
 
 @Tag(name = "Products")
 @AllArgsConstructor
@@ -42,7 +42,7 @@ public class ProductController {
     }
 
     @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<Map<String,String>> handleCategoryNotFound() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "category not found!"));
+    public ResponseEntity<ErrorDto> handleCategoryNotFound() {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto("category not found!"));
     }
 }
