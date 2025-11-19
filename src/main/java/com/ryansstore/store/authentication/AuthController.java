@@ -4,12 +4,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import com.ryansstore.store.users.UserMapper;
-import com.ryansstore.store.users.UserDto;
-import com.ryansstore.store.users.User;
+import jakarta.servlet.http.Cookie;
 import jakarta.validation.Valid;
+import com.ryansstore.store.users.UserMapper;
+import com.ryansstore.store.users.User;
+import com.ryansstore.store.users.UserDto;
+import com.ryansstore.store.users.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -48,7 +49,7 @@ public class AuthController {
     public ResponseEntity<UserDto> me() {
         User user =  authService.getCurrentUser();
         if(user == null)
-            return ResponseEntity.notFound().build();
+            throw new UserNotFoundException();
 
         return ResponseEntity.ok(userMapper.toDto(user));
     }

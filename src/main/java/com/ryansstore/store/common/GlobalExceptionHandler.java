@@ -7,6 +7,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import com.ryansstore.store.users.UserNotFoundException;
 import com.ryansstore.store.products.ProductNotFoundException;
 import com.ryansstore.store.carts.CartNotFoundException;
 import java.util.HashMap;
@@ -27,6 +28,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorDto> handleUnreadableMessage() {
         return ResponseEntity.badRequest().body(new ErrorDto("Invalid request body!"));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Void> handleUserNotFound() {
+        return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler(ProductNotFoundException.class)

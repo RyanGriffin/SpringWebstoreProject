@@ -3,8 +3,8 @@ package com.ryansstore.store.users;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.ryansstore.store.common.ErrorDto;
 import jakarta.validation.Valid;
+import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -48,11 +48,6 @@ public class UserController {
     @PostMapping("/{id}/change-password")
     public ResponseEntity<Void> changePassword(@PathVariable(name = "id") Long id, @Valid @RequestBody UserChangePasswordRequest request) {
         return userService.changePassword(id, request);
-    }
-
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Void> handleUserNotFound() {
-        return ResponseEntity.notFound().build();
     }
 
     @ExceptionHandler(EmailAlreadyRegisteredException.class)
