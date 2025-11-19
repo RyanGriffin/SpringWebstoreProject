@@ -2,6 +2,7 @@ package com.ryansstore.store.carts;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.carts.dtos.CartDto;
 import com.ryansstore.store.carts.dtos.CartItemDto;
@@ -44,7 +45,7 @@ public class CartController {
     public ResponseEntity<CartItemDto> addToCart(@PathVariable UUID cartId, @RequestBody CartAddItemRequest request) {
         CartItemDto cartItemDto = cartService.addToCart(cartId, request.getProductId());
 
-        return ResponseEntity.status(201).body(cartItemDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartItemDto);
     }
 
     @DeleteMapping("/{cartId}/items/{productId}")

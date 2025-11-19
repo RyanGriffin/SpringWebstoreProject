@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import com.ryansstore.store.users.UserNotFoundException;
-import com.ryansstore.store.products.ProductNotFoundException;
 import com.ryansstore.store.carts.CartNotFoundException;
+import com.ryansstore.store.products.ProductNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,13 +35,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity.notFound().build();
     }
 
+    @ExceptionHandler(CartNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleCartNotFound() {
+        return ResponseEntity.badRequest().body(new ErrorDto("cart not found!"));
+    }
+
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<ErrorDto> handleProductNotFound() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto("product not found!"));
-    }
-
-    @ExceptionHandler(CartNotFoundException.class)
-    public ResponseEntity<ErrorDto> handleCartNotFound() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDto("cart not found!"));
     }
 }

@@ -1,7 +1,6 @@
 package com.ryansstore.store.payments;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.common.ErrorDto;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +27,11 @@ public class CheckoutController {
 
     @ExceptionHandler(EmptyCartException.class)
     public ResponseEntity<ErrorDto> handleEmptyCartFound() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDto("cart is empty!"));
+        return ResponseEntity.badRequest().body(new ErrorDto("cart is empty!"));
     }
 
     @ExceptionHandler(PaymentException.class)
     public ResponseEntity<ErrorDto> handlePaymentException() {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorDto("error while creating new checkout session!"));
+        return ResponseEntity.internalServerError().body(new ErrorDto("error while creating new checkout session!"));
     }
 }
