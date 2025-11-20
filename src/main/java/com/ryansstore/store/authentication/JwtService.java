@@ -51,20 +51,4 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getPayload();
     }
-
-//    public Long getUserIdFromToken(String token) {
-//        return Long.valueOf(getClaims(token).getSubject());
-//    }
-//
-//    public String getNameFromToken(String token) {
-//        return getClaims(token).get("name").toString();
-//    }
-//
-//    public String getEmailFromToken(String token) {
-//        return getClaims(token).get("email").toString();
-//    }
-//
-//    public Role getRoleFromToken(String token) {
-//        return Role.valueOf(getClaims(token).get("role").toString());
-//    }
 }
