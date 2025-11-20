@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.net.URI;
 import java.util.List;
 
 @Tag(name = "Products")
@@ -28,7 +29,10 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, UriComponentsBuilder uriBuilder) {
-        return productService.createProduct(productDto, uriBuilder);
+        productService.createProduct(productDto);
+        URI uri =  uriBuilder.path("/products/{id}").buildAndExpand(productDto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(productDto);
     }
 
     @PutMapping("/{id}")

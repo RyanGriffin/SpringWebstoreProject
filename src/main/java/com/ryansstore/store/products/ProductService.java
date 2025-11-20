@@ -2,9 +2,7 @@ package com.ryansstore.store.products;
 
 import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponentsBuilder;
 import lombok.AllArgsConstructor;
-import java.net.URI;
 import java.util.List;
 
 @AllArgsConstructor
@@ -36,17 +34,14 @@ public class ProductService {
         return ResponseEntity.ok(productMapper.toDto(product));
     }
 
-    public ResponseEntity<ProductDto> createProduct(ProductDto productDto, UriComponentsBuilder uriBuilder) {
+    public void createProduct(ProductDto productDto) {
         Category category = categoryRepository.findById(productDto.getCategoryId()).orElseThrow(CategoryNotFoundException::new);
 
         Product product = productMapper.toEntity(productDto);
         product.setCategory(category);
         productRepository.save(product);
+
         productDto.setId(product.getId());
-
-        URI uri =  uriBuilder.path("/products/{id}").buildAndExpand(productDto.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(productDto);
     }
 
     public ResponseEntity<ProductDto> updateProduct(ProductDto productDto, Long id) {
