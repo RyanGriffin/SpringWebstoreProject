@@ -37,9 +37,7 @@ public class ProductService {
     }
 
     public ResponseEntity<ProductDto> createProduct(ProductDto productDto, UriComponentsBuilder uriBuilder) {
-        Category category = categoryRepository.findById(productDto.getCategoryId()).orElse(null);
-        if(category == null)
-            throw new CategoryNotFoundException();
+        Category category = categoryRepository.findById(productDto.getCategoryId()).orElseThrow(CategoryNotFoundException::new);
 
         Product product = productMapper.toEntity(productDto);
         product.setCategory(category);
