@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import java.net.URI;
 import java.util.List;
 
@@ -17,16 +19,23 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
+    @Operation(summary = "Retrieves a list of all products.")
     @GetMapping
-    public List<ProductDto> getAllProducts(@RequestParam(name = "categoryId", required = false) Byte id) {
+    public List<ProductDto> getAllProducts(
+            @Parameter(description = "ID of the category.")
+            @RequestParam(name = "categoryId", required = false) Byte id) {
         return productService.getAllProducts(id);
     }
 
+    @Operation(summary = "Retrieves a specific product.")
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> getProductById(
+            @Parameter(description = "ID of the product.")
+            @PathVariable Long id) {
         return productService.getProductById(id);
     }
 
+    @Operation(summary = "Creates a new product.")
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, UriComponentsBuilder uriBuilder) {
         productService.createProduct(productDto);
@@ -35,13 +44,20 @@ public class ProductController {
         return ResponseEntity.created(uri).body(productDto);
     }
 
+    @Operation(summary = "Updates a product's information.")
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> updateProduct(@PathVariable(name = "id") Long id, @RequestBody ProductDto productDto) {
+    public ResponseEntity<ProductDto> updateProduct(
+            @Parameter(description = "ID of the product.")
+            @PathVariable Long id,
+            @RequestBody ProductDto productDto) {
         return productService.updateProduct(productDto, id);
     }
 
+    @Operation(summary = "Deletes a product.")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Void> deleteProduct(
+            @Parameter(description = "ID of the product.")
+            @PathVariable(name = "id") Long id) {
         return productService.deleteProduct(id);
     }
 
