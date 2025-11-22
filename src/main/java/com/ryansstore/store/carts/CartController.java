@@ -11,6 +11,8 @@ import com.ryansstore.store.carts.dtos.CartAddItemRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import java.util.UUID;
 import java.net.URI;
 
@@ -21,6 +23,7 @@ import java.net.URI;
 public class CartController {
     private final CartService cartService;
 
+    @Operation(summary = "Creates a new cart.")
     @PostMapping
     public ResponseEntity<CartDto> createCart(UriComponentsBuilder uriBuilder) {
         CartDto cartDto = cartService.createCart();
@@ -29,36 +32,56 @@ public class CartController {
         return ResponseEntity.created(uri).body(cartDto);
     }
 
+    @Operation(summary = "Retrieves a cart.")
     @GetMapping("/{cartId}")
-    public CartDto getCart(@PathVariable UUID cartId) {
+    public CartDto getCart(
+            @Parameter(description = "ID of the cart.")
+            @PathVariable UUID cartId) {
         return cartService.getCart(cartId);
     }
 
+    @Operation(summary = "Removes all items from the cart.")
     @DeleteMapping("/{cartId}/items")
-    public ResponseEntity<Void> clearCart(@PathVariable UUID cartId) {
+    public ResponseEntity<Void> clearCart(
+            @Parameter(description = "ID of the cart.")
+            @PathVariable UUID cartId) {
         cartService.clearCart(cartId);
 
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Adds a product to the cart.")
     @PostMapping("/{cartId}/items")
-    public ResponseEntity<CartItemDto> addToCart(@PathVariable UUID cartId, @RequestBody CartAddItemRequest request) {
+    public ResponseEntity<CartItemDto> addToCart(
+            @Parameter(description = "ID of the cart.")
+            @PathVariable UUID cartId,
+            @Parameter(description = "DTO containing the ID of the product being added to the cart.")
+            @RequestBody CartAddItemRequest request) {
         CartItemDto cartItemDto = cartService.addToCart(cartId, request.getProductId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cartItemDto);
     }
 
+    @Operation(summary = "Removes a product from the cart.")
     @DeleteMapping("/{cartId}/items/{productId}")
-    public ResponseEntity<Void> removeItem(@PathVariable UUID cartId, @PathVariable Long productId) {
+    public ResponseEntity<Void> removeItem(
+            @Parameter(description = "ID of the cart.")
+            @PathVariable UUID cartId,
+            @Parameter(description = "ID of the product.")
+            @PathVariable Long productId) {
         cartService.removeItem(cartId, productId);
 
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Updates quantity of a product in the cart.")
     @PutMapping("/{cartId}/items/{productId}")
     public CartItemDto updateItemQuantity(
+            @Parameter(description = "ID of the cart.")
             @PathVariable UUID cartId,
+            @Parameter(description = "ID of the product.")
             @PathVariable Long productId,
+            @Parameter(description = "DTO containing the quantity.")
             @Valid @RequestBody CartItemQuantityRequest request) {
         return cartService.updateItemQuantity(cartId, productId, request.getQuantity());
     }
