@@ -28,9 +28,7 @@ public class AuthController {
     @Operation(summary = "Logs in a user.")
     @PostMapping("/login")
     public JwtResponse login(
-            @Parameter(description = "Request DTO containing an email and password.")
             @Valid @RequestBody LoginRequest loginRequest,
-            @Parameter(description = "HTTP response containing the refresh token cookie.")
             HttpServletResponse response) {
         LoginResponse loginResponse = authService.login(loginRequest);
 

@@ -55,7 +55,6 @@ public class CartController {
     public ResponseEntity<CartItemDto> addToCart(
             @Parameter(description = "ID of the cart.")
             @PathVariable UUID cartId,
-            @Parameter(description = "DTO containing the ID of the product being added to the cart.")
             @RequestBody CartAddItemRequest request) {
         CartItemDto cartItemDto = cartService.addToCart(cartId, request.getProductId());
 
@@ -81,7 +80,6 @@ public class CartController {
             @PathVariable UUID cartId,
             @Parameter(description = "ID of the product.")
             @PathVariable Long productId,
-            @Parameter(description = "DTO containing the quantity.")
             @Valid @RequestBody CartItemQuantityRequest request) {
         return cartService.updateItemQuantity(cartId, productId, request.getQuantity());
     }
