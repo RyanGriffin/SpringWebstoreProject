@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Cookie;
 import com.ryansstore.store.users.User;
 import com.ryansstore.store.users.UserDto;
 import com.ryansstore.store.users.UserNotFoundException;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
 import jakarta.validation.Valid;
 import com.ryansstore.store.users.UserMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,9 +27,7 @@ public class AuthController {
 
     @Operation(summary = "Logs in a user.")
     @PostMapping("/login")
-    public JwtResponse login(
-            @Valid @RequestBody LoginRequest loginRequest,
-            HttpServletResponse response) {
+    public JwtResponse login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         LoginResponse loginResponse = authService.login(loginRequest);
 
         Jwt accessToken = loginResponse.getAccessToken();
