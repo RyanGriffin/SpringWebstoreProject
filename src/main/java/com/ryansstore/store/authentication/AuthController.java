@@ -51,7 +51,7 @@ public class AuthController {
         return new JwtResponse(authService.refreshToken(refreshToken).toString());
     }
 
-    @Operation(summary = "Returns a response containing the details of the current user.")
+    @Operation(summary = "Retrieves the details of the current user.")
     @GetMapping("/me")
     public ResponseEntity<UserDto> me() {
         User user =  authService.getCurrentUser();

@@ -18,13 +18,13 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    @Operation(summary = "Returns a response containing a list of every order.")
+    @Operation(summary = "Retrieves a list of all order.")
     @GetMapping
     public List<OrderDto> getOrders() {
         return orderService.getAllOrders();
     }
 
-    @Operation(summary = "Returns a response containing a specific order.")
+    @Operation(summary = "Retrieves a specific order.")
     @GetMapping("/{orderId}")
     public ResponseEntity<OrderDto> getOrder(
             @Parameter(description = "ID of the order.")
