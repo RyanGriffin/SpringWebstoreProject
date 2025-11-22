@@ -40,16 +40,6 @@ public class CartController {
         return cartService.getCart(cartId);
     }
 
-    @Operation(summary = "Removes all items from the cart.")
-    @DeleteMapping("/{cartId}/items")
-    public ResponseEntity<Void> clearCart(
-            @Parameter(description = "ID of the cart.")
-            @PathVariable UUID cartId) {
-        cartService.clearCart(cartId);
-
-        return ResponseEntity.noContent().build();
-    }
-
     @Operation(summary = "Adds a product to the cart.")
     @PostMapping("/{cartId}/items")
     public ResponseEntity<CartItemDto> addToCart(
@@ -59,6 +49,17 @@ public class CartController {
         CartItemDto cartItemDto = cartService.addToCart(cartId, request.getProductId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cartItemDto);
+    }
+
+    @Operation(summary = "Updates quantity of a product in the cart.")
+    @PutMapping("/{cartId}/items/{productId}")
+    public CartItemDto updateItemQuantity(
+            @Parameter(description = "ID of the cart.")
+            @PathVariable UUID cartId,
+            @Parameter(description = "ID of the product.")
+            @PathVariable Long productId,
+            @Valid @RequestBody CartItemQuantityRequest request) {
+        return cartService.updateItemQuantity(cartId, productId, request.getQuantity());
     }
 
     @Operation(summary = "Removes a product from the cart.")
@@ -73,14 +74,13 @@ public class CartController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Updates quantity of a product in the cart.")
-    @PutMapping("/{cartId}/items/{productId}")
-    public CartItemDto updateItemQuantity(
+    @Operation(summary = "Removes all items from the cart.")
+    @DeleteMapping("/{cartId}/items")
+    public ResponseEntity<Void> clearCart(
             @Parameter(description = "ID of the cart.")
-            @PathVariable UUID cartId,
-            @Parameter(description = "ID of the product.")
-            @PathVariable Long productId,
-            @Valid @RequestBody CartItemQuantityRequest request) {
-        return cartService.updateItemQuantity(cartId, productId, request.getQuantity());
+            @PathVariable UUID cartId) {
+        cartService.clearCart(cartId);
+
+        return ResponseEntity.noContent().build();
     }
 }
