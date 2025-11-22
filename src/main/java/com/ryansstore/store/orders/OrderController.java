@@ -7,6 +7,8 @@ import com.ryansstore.store.orders.dtos.OrderDto;
 import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import java.util.List;
 
 @Tag(name = "Orders")
@@ -16,13 +18,17 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
+    @Operation(summary = "Returns a response containing a list of every order.")
     @GetMapping
     public List<OrderDto> getOrders() {
         return orderService.getAllOrders();
     }
 
+    @Operation(summary = "Returns a response containing a specific order.")
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderDto> getOrder(@PathVariable("orderId") Long orderId) {
+    public ResponseEntity<OrderDto> getOrder(
+            @Parameter(description = "ID of the order.")
+            @PathVariable("orderId") Long orderId) {
         return orderService.getOrder(orderId);
     }
 
