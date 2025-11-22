@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import java.util.List;
 import java.net.URI;
 
@@ -17,6 +19,7 @@ import java.net.URI;
 public class UserController {
     private final UserService userService;
 
+    @Operation(summary = "Registers a new user.")
     @PostMapping
     public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserRegisterRequest request, UriComponentsBuilder uriBuilder) {
         UserDto userDto = userService.register(request);
@@ -25,28 +28,45 @@ public class UserController {
         return ResponseEntity.created(uri).body(userDto);
     }
 
+    @Operation(summary = "Retrieves a list of all users.")
     @GetMapping
-    public List<UserDto> getAllUsers(@RequestParam(name = "sort", defaultValue = "", required = false) String sort) {
+    public List<UserDto> getAllUsers(
+            @Parameter(description = "Desired method of sorting. (sorts by name by default)")
+            @RequestParam(name = "sort", defaultValue = "", required = false) String sort) {
         return userService.getAllUsers(sort);
     }
 
+    @Operation(summary = "Retrieves a specific user.")
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUser(
+            @Parameter(description = "ID of the user.")
+            @PathVariable Long id) {
         return userService.getUser(id);
     }
 
+    @Operation(summary = "Updates a user's information.")
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") Long id, @RequestBody UserUpdateRequest request) {
+    public ResponseEntity<UserDto> updateUser(
+            @Parameter(description = "ID of the user.")
+            @PathVariable Long id,
+            @RequestBody UserUpdateRequest request) {
         return userService.updateUser(id, request);
     }
 
+    @Operation(summary = "Deletes a user.")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Void> deleteUser(
+            @Parameter(description = "ID of the user.")
+            @PathVariable Long id) {
         return userService.deleteUser(id);
     }
 
+    @Operation(summary = "Changes a user's password.")
     @PostMapping("/{id}/change-password")
-    public ResponseEntity<Void> changePassword(@PathVariable(name = "id") Long id, @Valid @RequestBody UserChangePasswordRequest request) {
+    public ResponseEntity<Void> changePassword(
+            @Parameter(description = "ID of the user.")
+            @PathVariable(name = "id") Long id,
+            @Valid @RequestBody UserChangePasswordRequest request) {
         return userService.changePassword(id, request);
     }
 
