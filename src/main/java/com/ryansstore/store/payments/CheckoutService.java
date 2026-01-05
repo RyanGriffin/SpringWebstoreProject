@@ -1,5 +1,6 @@
 package com.ryansstore.store.payments;
 
+import com.ryansstore.store.orders.OrderNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ryansstore.store.authentication.AuthService;
@@ -48,7 +49,7 @@ public class CheckoutService {
         paymentGateway
                 .parseWebhookRequest(request)
                 .ifPresent(paymentResult -> {
-                    Order order = orderRepository.findById(paymentResult.getOrderId()).orElseThrow();
+                    Order order = orderRepository.findById(paymentResult.getOrderId()).orElseThrow(OrderNotFoundException::new);
                     switch (paymentResult.getStatus()) {
                         case PAID -> order.setStatus(OrderStatus.PAID);
                         case PENDING -> order.setStatus(OrderStatus.PENDING);
