@@ -26,7 +26,7 @@ public class StripePaymentGateway implements PaymentGateway {
     @Override
     public CheckoutSession createCheckoutSession(Order order) {
         try {
-            var builder = SessionCreateParams.builder()
+            SessionCreateParams.Builder builder = SessionCreateParams.builder()
                     .setMode(SessionCreateParams.Mode.PAYMENT)
                     .setSuccessUrl(websiteUrl + "/checkout-success?order_id=" + order.getId())
                     .setCancelUrl(websiteUrl + "/checkout-cancel")
