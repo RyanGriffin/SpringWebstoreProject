@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.data.domain.Sort;
-import com.ryansstore.store.authentication.AuthService;
 import lombok.AllArgsConstructor;
 import java.util.Set;
 import java.util.List;
@@ -18,7 +18,6 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authManager;
-    private final AuthService authService;
 
     public UserDto register(UserRegisterRequest request) {
         if(userRepository.existsByEmail(request.getEmail()))
@@ -73,11 +72,8 @@ public class UserService {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("#id == authentication.principal OR hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUser(Long id) {
-        User currentUser = authService.getCurrentUser();
-        if(!currentUser.getId().equals(id) && !currentUser.isAdmin())
-            throw new UserUnauthorizedDeleteException();
-
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
         userRepository.delete(user);
