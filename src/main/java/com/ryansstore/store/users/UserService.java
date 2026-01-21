@@ -62,7 +62,7 @@ public class UserService {
 
     public ResponseEntity<Void> deleteUser(Long id) {
         User currentUser = authService.getCurrentUser();
-        if(!currentUser.getId().equals(id) && !currentUser.getRole().equals(Role.ADMIN))
+        if(!currentUser.getId().equals(id) && !currentUser.isAdmin())
             throw new UserUnauthorizedDeleteException();
 
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);

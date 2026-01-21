@@ -19,7 +19,7 @@ public class OrderService {
     public List<OrderDto> getAllOrders() {
         User user = authService.getCurrentUser();
 
-        if(user.getRole().equals(Role.ADMIN))
+        if(user.isAdmin())
             return orderRepository.findAll()
                     .stream()
                     .map(orderMapper::toDto)

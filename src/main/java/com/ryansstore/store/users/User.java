@@ -53,6 +53,10 @@ public class User {
     )
     private Set<Product> wishList = new HashSet<>();
 
+    public boolean isAdmin() {
+        return role.equals(Role.ADMIN);
+    }
+
     public void addAddress(Address address) {
         addresses.add(address);
         address.setUser(this);
