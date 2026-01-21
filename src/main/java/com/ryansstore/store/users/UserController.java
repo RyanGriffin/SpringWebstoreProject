@@ -1,8 +1,9 @@
 package com.ryansstore.store.users;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import jakarta.validation.Valid;
 import com.ryansstore.store.common.ErrorDto;
 import lombok.AllArgsConstructor;
@@ -73,5 +74,10 @@ public class UserController {
     @ExceptionHandler(EmailAlreadyRegisteredException.class)
     public ResponseEntity<ErrorDto> handleEmailAlreadyRegistered() {
         return ResponseEntity.badRequest().body(new ErrorDto("email is already registered!"));
+    }
+
+    @ExceptionHandler(UserUnauthorizedDeleteException.class)
+    public ResponseEntity<ErrorDto> handleUnauthorizedDelete() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorDto("you do not have permission to delete this user!"));
     }
 }
