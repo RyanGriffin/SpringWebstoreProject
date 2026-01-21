@@ -20,9 +20,15 @@ public class OrderService {
         User user = authService.getCurrentUser();
 
         if(user.getRole().equals(Role.ADMIN))
-            return orderRepository.findAll().stream().map(orderMapper::toDto).toList();
+            return orderRepository.findAll()
+                    .stream()
+                    .map(orderMapper::toDto)
+                    .toList();
 
-        return orderRepository.getAllByCustomer(user).stream().map(orderMapper::toDto).toList();
+        return orderRepository.getAllByCustomer(user)
+                .stream()
+                .map(orderMapper::toDto)
+                .toList();
     }
 
     public ResponseEntity<OrderDto> getOrder(Long orderId) {
