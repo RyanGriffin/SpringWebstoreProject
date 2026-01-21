@@ -60,18 +60,6 @@ public class UserService {
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 
-    public ResponseEntity<Void> deleteUser(Long id) {
-        User currentUser = authService.getCurrentUser();
-        if(!currentUser.getId().equals(id) && !currentUser.isAdmin())
-            throw new UserUnauthorizedDeleteException();
-
-        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-
-        userRepository.delete(user);
-
-        return ResponseEntity.noContent().build();
-    }
-
     public ResponseEntity<Void> changePassword(Long id, UserChangePasswordRequest request) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
@@ -81,6 +69,18 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    public ResponseEntity<Void> deleteUser(Long id) {
+        User currentUser = authService.getCurrentUser();
+        if(!currentUser.getId().equals(id) && !currentUser.isAdmin())
+            throw new UserUnauthorizedDeleteException();
+
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        userRepository.delete(user);
 
         return ResponseEntity.noContent().build();
     }

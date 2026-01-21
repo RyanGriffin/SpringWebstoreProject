@@ -54,14 +54,6 @@ public class UserController {
         return userService.updateUser(id, request);
     }
 
-    @Operation(summary = "Deletes a user.")
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(
-            @Parameter(description = "ID of the user.")
-            @PathVariable Long id) {
-        return userService.deleteUser(id);
-    }
-
     @Operation(summary = "Changes a user's password.")
     @PostMapping("/{id}/change-password")
     public ResponseEntity<Void> changePassword(
@@ -69,6 +61,14 @@ public class UserController {
             @PathVariable(name = "id") Long id,
             @Valid @RequestBody UserChangePasswordRequest request) {
         return userService.changePassword(id, request);
+    }
+
+    @Operation(summary = "Deletes a user.")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(
+            @Parameter(description = "ID of the user.")
+            @PathVariable Long id) {
+        return userService.deleteUser(id);
     }
 
     @ExceptionHandler(EmailAlreadyRegisteredException.class)
